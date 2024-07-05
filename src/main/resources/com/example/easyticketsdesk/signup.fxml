@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<?import javafx.scene.text.Font?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="476.0" prefWidth="698.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easyticketsdesk.SignupController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+    <left>
+        <Pane fx:id="left_pane" styleClass="linear-grad" prefHeight="476.0" prefWidth="349.0" BorderPane.alignment="CENTER" />
+    </left>
+    <right>
+        <Pane prefHeight="476.0" prefWidth="361.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="46.0" layoutY="41.0" prefHeight="35.0" prefWidth="102.0" text="Sign up">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="email_field" layoutX="46.0" layoutY="178.0" prefHeight="35.0" prefWidth="245.0" promptText="Email" />
+                <PasswordField fx:id="password_field" layoutX="46.0" layoutY="238.0" prefHeight="35.0" prefWidth="245.0" promptText="Password" />
+                <TextField fx:id="first_name_field" layoutX="46.0" layoutY="134.0" prefHeight="35.0" prefWidth="118.0" promptText="First name" />
+                <TextField fx:id="last_name_field" layoutX="173.0" layoutY="134.0" prefHeight="35.0" prefWidth="118.0" promptText="Last name" />
+                <Button fx:id="signup_btn" layoutX="98.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#signup_clicked" prefHeight="31.0" prefWidth="131.0" style="-fx-background-radius: 5; -fx-background-color: #D5CBEB;" text="Sign up" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Button>
+                <Label fx:id="already_exists" layoutX="90.0" layoutY="403.0" onMouseClicked="#already_exists_clicked" text="Already exists? Sign In">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <PasswordField fx:id="register_repassword_field" layoutX="46.0" layoutY="285.0" prefHeight="35.0" prefWidth="245.0" promptText="re-password" />
+            </children>
+        </Pane>
+    </right>
+</BorderPane>
