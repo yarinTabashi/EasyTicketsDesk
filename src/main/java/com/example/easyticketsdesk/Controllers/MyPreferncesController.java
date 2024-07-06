@@ -1,4 +1,4 @@
-package com.example.easyticketsdesk;
+package com.example.easyticketsdesk.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,17 +6,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ReserveController {
-    @FXML
-    private Label event_name_label;
+public class MyPreferncesController {
 
     @FXML
-    private Label location_and_venue_label;
+    private ImageView logout_image;
 
     @FXML
     private Label menu_explore;
@@ -28,14 +27,16 @@ public class ReserveController {
     private Label menu_my_tickets;
 
     @FXML
-    private Button reserve_btn;
+    private Button save_changes_btn;
 
     @FXML
-    private Label selected_desc_label;
+    void logoutClicked(MouseEvent event) {
+
+    }
 
     @FXML
     void menu_explore_clicked(MouseEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainwindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/mainwindow.fxml"));
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -53,7 +54,7 @@ public class ReserveController {
 
     @FXML
     void menu_my_pref_clicked(MouseEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mypreferences.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/mypreferences.fxml"));
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -71,7 +72,7 @@ public class ReserveController {
 
     @FXML
     void menu_my_tickets_clicked(MouseEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("myorders.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/myorders.fxml"));
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -88,6 +89,8 @@ public class ReserveController {
     }
 
     @FXML
-    void reserve_cliked(MouseEvent event) {
+    void save_changes_clicked(MouseEvent event) {
+
     }
+
 }

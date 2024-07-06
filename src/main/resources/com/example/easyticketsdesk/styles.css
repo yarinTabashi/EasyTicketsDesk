@@ -1,3 +1,128 @@
 .linear-grad {
     -fx-background-color: linear-gradient(to bottom left, #A868A0, #2D75E8);
 }
+
+.custom-button {
+    -fx-background-radius: 5;
+    -fx-background-color: #452a72;
+    -fx-text-fill: white;
+    -fx-cursor: hand; /* Optional: Change cursor to pointer on hover */
+}
+
+.button:hover {
+    -fx-background-color: #2b1a47; /* Change background color on hover */
+    -fx-text-fill: white; /* Change text color on hover */
+    -fx-cursor: hand; /* Optional: Change cursor to pointer on hover */
+}
+
+/* Custom Text Field - Minimalist Design */
+.custom-text-field {
+    -fx-background-color: #f0f0f0; /* Light gray background */
+    -fx-background-radius: 5; /* Rounded corners */
+    -fx-text-fill: #333333; /* Dark gray text color */
+    -fx-padding: 8px; /* Padding inside the text field */
+    -fx-font-size: 14px; /* Font size */
+    -fx-border-color: #d9d9d9; /* Light gray border color */
+    -fx-border-radius: 5; /* Border radius */
+    -fx-border-width: 1px; /* Border width */
+    -fx-effect: innershadow(gaussian, #e0e0e0, 2, 0, 0, 0); /* Inner shadow for depth */
+}
+
+/* Hover effect for Custom Text Field */
+.custom-text-field:hover {
+    -fx-background-color: #e0e0e0; /* Lighter background color on hover */
+    -fx-border-color: #c0c0c0; /* Lighter border color on hover */
+    -fx-cursor: hand; /* Optional: Change cursor to pointer on hover */
+}
+
+
+.menu-item {
+    -fx-font-size: 20px;
+    -fx-alignment: center;
+    -fx-pref-height: 37.0;
+    -fx-pref-width: 194.0;
+    -fx-cursor: hand;
+    -fx-text-fill: #333333; /* Dark gray text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-color: #cccccc; /* Light gray border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-padding: 5px 10px; /* Padding inside the label */
+}
+
+.menu-item:hover {
+    -fx-background-color: #eeeeee; /* Light gray background on hover */
+}
+
+.menu-item.active {
+    -fx-background-color: #eeeeee; /* Light gray background on hover */
+}
+
+
+.event-card {
+    padding: 10px;
+    margin: 10px;
+    background-color: #E0BBFF;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.artist-label {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.sold-out {
+    background-color: #FF6347;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: default;
+}
+
+.sold-out:hover {
+    background-color: #FF6347; /* Keep the same color on hover */
+}
+
+
+
+
+
+/* Apply styles to the fx:root VBox */
+.fx-root {
+    -fx-background-color: #e2ccff; /* Light purple background */
+    -fx-background-radius: 20;
+    -fx-border-color: #906dbf; /* Border color */
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-radius: 20;
+    -fx-padding: 10px; /* Padding inside the VBox */
+}
+
+/* Style for the image pane inside the VBox */
+.image-pane {
+    -fx-background-color: #906dbf; /* Purple background */
+    -fx-background-radius: 20;
+    -fx-border-color: #ffffff; /* White border color */
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 1); /* Shadow effect */
+}
+
+
+.myborder {
+    -fx-background-color: #9b59b6; /* Purple background */
+    -fx-background-radius: 20;
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 20, 0, 0, 1), /* Stronger drop shadow */
+                inner-shadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 1), /* Inner shadow */
+                glow(color-stop(0%, derive(-fx-background-color, 30%))),
+                reflection;
+
+    -fx-padding: 10px; /* Padding for inner shadow effect */
+}
+
+.myborder:hover {
+    -fx-background-color: #a08bc7; /* Darker purple on hover */
+}
