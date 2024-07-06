@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SignInController {
+    private BlankSign mainScreenController;
     @FXML
     private TextField email_field;
 
@@ -24,10 +25,15 @@ public class SignInController {
     @FXML
     private Button signup_btn;
 
+    public void setMainScreenController(BlankSign mainScreenController) {
+        this.mainScreenController = mainScreenController;
+    }
+
     @FXML
     void forgotPasswordClicked(MouseEvent event) {
 
     }
+
     @FXML
     void signInBtnClicked(MouseEvent event) {
         if (validateFields()) {
@@ -38,7 +44,7 @@ public class SignInController {
 
     @FXML
     void signUpClicked(MouseEvent event) {
-        switchToSignUpWindow();
+        mainScreenController.loadSignUpScreen();
     }
 
     private boolean validateFields() {
@@ -79,20 +85,6 @@ public class SignInController {
             Scene scene = new Scene(root);
 
             Stage stage = (Stage) signin_btn.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void switchToSignUpWindow() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/signup.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-
-            Stage stage = (Stage) signup_btn.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="border_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="476.0" prefWidth="698.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easyticketsdesk.Controllers.BlankSign">
+    <stylesheets>
+        <URL value="@../styles.css" />
+    </stylesheets>
+    <left>
+        <Pane fx:id="left_pane" prefHeight="476.0" prefWidth="349.0" styleClass="linear-grad" BorderPane.alignment="CENTER">
+            <children>
+                <Pane layoutX="4.0" layoutY="3.0" prefHeight="470.0" prefWidth="341.0">
+                    <children>
+                        <ImageView fitHeight="127.0" fitWidth="150.0" layoutX="107.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/icon.png" />
+                            </image>
+                        </ImageView>
+                        <Label layoutX="104.0" layoutY="271.0" text="EasyTickets" textFill="cornsilk">
+                            <font>
+                                <Font name="System Bold" size="25.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="80.0" layoutY="307.0" prefHeight="60.0" prefWidth="182.0" text="Your Gateway to Unforgettable Experiences!" textAlignment="CENTER" textFill="cornsilk" wrapText="true">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
+            </children>
+        </Pane>
+    </left>
+</BorderPane>

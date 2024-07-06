@@ -22,10 +22,26 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="textField1" layoutX="44.0" layoutY="259.0" prefHeight="52.0" prefWidth="54.0" onKeyTyped="#handleDigitInput" />
-      <TextField fx:id="textField2" layoutX="118.0" layoutY="259.0" prefHeight="52.0" prefWidth="54.0" onKeyTyped="#handleDigitInput" />
-      <TextField fx:id="textField3" layoutX="191.0" layoutY="259.0" prefHeight="52.0" prefWidth="54.0" onKeyTyped="#handleDigitInput" />
-      <TextField fx:id="textField4" layoutX="262.0" layoutY="259.0" prefHeight="52.0" prefWidth="54.0" onKeyTyped="#handleDigitInput" />
+      <TextField fx:id="textField1" layoutX="44.0" layoutY="259.0" prefHeight="52.0" prefWidth="54.0" onKeyTyped="#handleDigitInput" alignment="CENTER">
+         <font>
+            <Font size="20.0" /> <!-- Set the desired font size -->
+         </font>
+      </TextField>
+      <TextField fx:id="textField2" layoutX="118.0" layoutY="259.0" prefHeight="52.0" prefWidth="54.0" onKeyTyped="#handleDigitInput" alignment="CENTER">
+         <font>
+            <Font size="20.0" /> <!-- Set the desired font size -->
+         </font>
+      </TextField>
+      <TextField fx:id="textField3" layoutX="191.0" layoutY="259.0" prefHeight="52.0" prefWidth="54.0" onKeyTyped="#handleDigitInput" alignment="CENTER">
+         <font>
+            <Font size="20.0" /> <!-- Set the desired font size -->
+         </font>
+      </TextField>
+      <TextField fx:id="textField4" layoutX="262.0" layoutY="259.0" prefHeight="52.0" prefWidth="54.0" onKeyTyped="#handleDigitInput" alignment="CENTER">
+         <font>
+            <Font size="20.0" /> <!-- Set the desired font size -->
+         </font>
+      </TextField>
       <Button layoutX="112.0" layoutY="340.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="136.0" text="Submit" styleClass="custom-button" />
       <Label layoutX="113.0" layoutY="391.0" text="--Warnning label--" textFill="#d90000">
          <font>

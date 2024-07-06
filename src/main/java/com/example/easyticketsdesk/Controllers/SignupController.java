@@ -15,6 +15,9 @@ import java.io.IOException;
 
 public class SignupController {
     @FXML
+    private BlankSign mainScreenController;
+
+    @FXML
     private Label already_exists;
 
     @FXML
@@ -42,14 +45,18 @@ public class SignupController {
 
     @FXML
     void already_exists_clicked(MouseEvent event) {
-        switchToSignInWindow();
+        mainScreenController.loadSignInScreen();
     }
 
     @FXML
     void signup_clicked(MouseEvent event) {
-        if (validateFields()) {
-            switchToMainWindow();
-        }
+        //if (validateFields()) {
+            mainScreenController.loadOTP();
+        //}
+    }
+
+    public void setMainScreenController(BlankSign mainScreenController) {
+        this.mainScreenController = mainScreenController;
     }
 
     private boolean validateFields() {
@@ -99,20 +106,6 @@ public class SignupController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    private void switchToSignInWindow() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/signin.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-
-            Stage stage = (Stage) already_exists.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void switchToMainWindow() {

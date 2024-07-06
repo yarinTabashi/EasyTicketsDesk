@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easyticketsdesk.Controllers.MainWindowController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easyticketsdesk.Controllers.MainWindowController">
     <stylesheets>
         <URL value="@../styles.css" />
     </stylesheets>
@@ -59,11 +50,13 @@
                         <Insets top="80.0" />
                     </VBox.margin>
                 </Text>
-                <Label fx:id="menu_explore_btn" alignment="CENTER" onMouseClicked="#explore_clicked" prefHeight="37.0" prefWidth="194.0" styleClass="menu-item" text="Explore Events" />
+                <Label fx:id="menu_explore_btn" alignment="CENTER" onMouseClicked="#explore_clicked" prefHeight="37.0" prefWidth="194.0" styleClass="menu-item" text="Explore" />
                 <Text fill="#efefef" strokeType="OUTSIDE" strokeWidth="0.0" text="________________________________" />
-                <Label fx:id="menu_my_tickets_btn" onMouseClicked="#my_tickets_clicked" styleClass="menu-item" text="My tickets" />
+                <Label fx:id="menu_search_btn" alignment="CENTER" onMouseClicked="#explore_clicked" prefHeight="37.0" prefWidth="194.0" styleClass="menu-item" text="Search" />
                 <Text fill="#efefef" strokeType="OUTSIDE" strokeWidth="0.0" text="________________________________" />
-                <Label fx:id="menu_my_preferences_btn"  onMouseClicked="#my_preferences_clicked" prefHeight="37.0" prefWidth="194.0" styleClass="menu-item" text="My Preferences" />
+                <Label fx:id="menu_my_tickets_btn" onMouseClicked="#my_tickets_clicked" styleClass="menu-item" text="Orders" />
+                <Text fill="#efefef" strokeType="OUTSIDE" strokeWidth="0.0" text="________________________________" />
+                <Label fx:id="menu_my_preferences_btn" onMouseClicked="#my_preferences_clicked" prefHeight="37.0" prefWidth="194.0" styleClass="menu-item" text="Preferences" />
                 <Text fill="#efefef" strokeType="OUTSIDE" strokeWidth="0.0" text="________________________________" />
                 <Pane prefHeight="200.0" prefWidth="200.0">
                     <children>
@@ -97,7 +90,7 @@
         <Pane prefHeight="700.0" prefWidth="868.0" style="-fx-background-color: #f2f2f2;">
             <children>
                 <ImageView fitHeight="45.0" fitWidth="43.0" layoutX="588.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                <Label layoutX="26.0" layoutY="19.0" prefHeight="36.0" prefWidth="141.0" text="Dashboard" wrapText="true">
+                <Label layoutX="30.0" layoutY="14.0" prefHeight="79.0" prefWidth="275.0" text="Good evening, First" textFill="#620463" wrapText="true">
                     <font>
                         <Font name="System Bold" size="25.0" />
                     </font>
@@ -152,7 +145,6 @@
                         <Pane layoutX="24.0" prefHeight="104.0" prefWidth="94.0" style="-fx-background-color: #906dbf; -fx-background-radius: 60;" />
                     </children>
                 </Pane>
-                <TextField layoutX="182.0" layoutY="18.0" prefHeight="38.0" prefWidth="572.0" promptText="Search..." style="-fx-border-radius: 10; -fx-border-color: #4b2b75; -fx-background-color: #f8f2ff;" />
                 <Button layoutX="785.0" layoutY="111.0" minWidth="53.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="53.0" style="-fx-background-color: #c9e6b3;" text="&gt;" textAlignment="CENTER">
                     <font>
                         <Font size="9.0" />
@@ -163,7 +155,7 @@
                         <Font size="9.0" />
                     </font>
                 </Button>
-            <ScrollPane layoutX="50.0" layoutY="161.0" HBox.hgrow="ALWAYS" prefHeight="270.0" prefWidth="775.0" >
+            <ScrollPane layoutX="50.0" layoutY="161.0" prefHeight="270.0" prefWidth="775.0" HBox.hgrow="ALWAYS">
                <content>
                   <HBox fx:id="cardsContainer" minWidth="-Infinity" prefHeight="250.0" spacing="20" />
                </content>

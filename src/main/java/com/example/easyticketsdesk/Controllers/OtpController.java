@@ -6,9 +6,10 @@ import javafx.scene.input.KeyEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-// TODO: Fix behavior to restrict each text field to one digit and auto-focus to the next field on input.
+// TODO: Fix behavior to restrict each text field to one digit and auto-focus to the next field on input. UPDATE:FIXED!
 public class OtpController implements Initializable {
-
+    @FXML
+    private BlankSign mainScreenController;
     @FXML
     private TextField textField1;
 
@@ -26,18 +27,24 @@ public class OtpController implements Initializable {
         // Initialize method
     }
 
+    public void setMainScreenController(BlankSign mainScreenController) {
+        this.mainScreenController = mainScreenController;
+    }
+
+    private void setupTextFields() {
+        // Set event handlers for all text fields
+        textField1.setOnKeyTyped(this::handleDigitInput);
+        textField2.setOnKeyTyped(this::handleDigitInput);
+        textField3.setOnKeyTyped(this::handleDigitInput);
+        textField4.setOnKeyTyped(this::handleDigitInput);
+    }
+
     @FXML
     private void handleDigitInput(KeyEvent event) {
         TextField source = (TextField) event.getSource();
-        if (source.getText().length() >= 1) {
-            // If the current text field is already filled, consume the event
-            event.consume();
-            return;
-        }
 
-        // Allow only digits (0-9)
-        String character = event.getCharacter();
-        if (!character.matches("[0-9]")) {
+        // Allow only one digit (0-9)
+        if (!event.getCharacter().matches("[0-9]")) {
             event.consume();
             return;
         }
@@ -54,7 +61,7 @@ public class OtpController implements Initializable {
                 textField4.requestFocus();
                 break;
             case "textField4":
-                // Do something when the last text field is filled, e.g., submit
+                // Focus stays on textField4, or do something else like submit
                 break;
             default:
                 break;

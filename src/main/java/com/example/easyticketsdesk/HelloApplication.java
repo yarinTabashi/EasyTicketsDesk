@@ -9,7 +9,7 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/easyticketsdesk/gui-fxml/signin.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/easyticketsdesk/gui-fxml/blanksign.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Image icon = new Image(getClass().getResourceAsStream("icons/icon.png"));
         stage.getIcons().add(icon);
