@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class SignupController {
     @FXML
-    private BlankSign mainScreenController;
+    private MainSign mainScreenController;
 
     @FXML
     private Label already_exists;
@@ -55,7 +55,7 @@ public class SignupController {
         //}
     }
 
-    public void setMainScreenController(BlankSign mainScreenController) {
+    public void setMainScreenController(MainSign mainScreenController) {
         this.mainScreenController = mainScreenController;
     }
 
@@ -110,7 +110,7 @@ public class SignupController {
 
     private void switchToMainWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/mainwindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/dashboard.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
 

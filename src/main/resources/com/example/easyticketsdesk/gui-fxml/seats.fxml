@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easyticketsdesk.Controllers.SeatsController">
+   <children>
+       <Label layoutX="26.0" layoutY="19.0" prefHeight="36.0" prefWidth="141.0" text="Reserve" wrapText="true">
+           <font>
+               <Font name="System Bold" size="25.0" />
+           </font>
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="21.0" />
+         </VBox.margin>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+       </Label>
+       <VBox fx:id="title_pane" alignment="CENTER" layoutX="200.0" layoutY="74.0" prefHeight="104.0" prefWidth="451.0" style="-fx-background-color: #f5f6ff; -fx-background-radius: 50;">
+           <children>
+               <Label fx:id="event_name_label" alignment="TOP_LEFT" prefHeight="46.0" prefWidth="131.0" text="Eyal Golan">
+                   <font>
+                       <Font name="System Bold" size="24.0" />
+                   </font>
+               </Label>
+               <Label fx:id="location_and_venue_label" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="229.0" text="Park Hayarkon | 05/07/2024">
+                   <font>
+                       <Font size="17.0" />
+                   </font>
+               </Label>
+           </children>
+         <VBox.margin>
+            <Insets left="150.0" right="150.0" />
+         </VBox.margin>
+       </VBox>
+       <Pane fx:id="stage_pane" layoutX="257.0" layoutY="195.0" prefHeight="34.0" prefWidth="668.0" style="-fx-background-color: #7e6487; -fx-background-radius: 10;">
+         <VBox.margin>
+            <Insets left="100.0" right="100.0" top="20.0" />
+         </VBox.margin></Pane>
+       <Pane fx:id="audience_pane" minWidth="-Infinity" prefHeight="367.0" prefWidth="754.0" style="-fx-background-color: #4c1e5c; -fx-background-radius: 10;" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+         <children>
+            <GridPane fx:id="seats_gridpane" prefHeight="355.0" prefWidth="828.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </children></Pane>
+      <HBox fx:id="guide_pane" alignment="TOP_RIGHT" prefHeight="35.0" prefWidth="600.0">
+         <children>
+             <Pane layoutX="770.0" layoutY="560.0" prefHeight="34.0" prefWidth="84.0" style="-fx-background-color: #a4bd91; -fx-background-radius: 30;">
+                 <children>
+                     <Label fx:id="avaliable_guide" alignment="TOP_LEFT" layoutX="8.0" layoutY="3.0" prefHeight="16.0" prefWidth="68.0" text="Available" textFill="WHITE">
+                         <font>
+                             <Font name="System Bold" size="15.0" />
+                         </font>
+                     </Label>
+                 </children>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+             </Pane>
+             <Pane layoutX="678.0" layoutY="560.0" prefHeight="34.0" prefWidth="84.0" style="-fx-background-color: #cf959d; -fx-background-radius: 30;">
+                 <children>
+                     <Label fx:id="reserved_guide" alignment="TOP_LEFT" layoutX="8.0" layoutY="3.0" prefHeight="16.0" prefWidth="68.0" text="Reserved" textFill="WHITE">
+                         <font>
+                             <Font name="System Bold" size="15.0" />
+                         </font>
+                     </Label>
+                 </children>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+             </Pane>
+             <Pane layoutX="587.0" layoutY="560.0" prefHeight="34.0" prefWidth="84.0" style="-fx-background-color: #7d916d; -fx-background-radius: 30;">
+                 <children>
+                     <Label fx:id="selected_guide" alignment="TOP_LEFT" layoutX="12.0" layoutY="3.0" prefHeight="16.0" prefWidth="68.0" text="Selected" textFill="WHITE">
+                         <font>
+                             <Font name="System Bold" size="15.0" />
+                         </font>
+                     </Label>
+                 </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+             </Pane>
+         </children>
+         <VBox.margin>
+            <Insets right="50.0" top="10.0" />
+         </VBox.margin></HBox>
+       <Button fx:id="reserve_btn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#reserve_clicked" prefHeight="36.0" prefWidth="240.0" style="-fx-background-radius: 20; -fx-background-color: #301257;" text="Reserve" textFill="WHITE">
+           <font>
+               <Font name="System Bold" size="14.0" />
+           </font>
+         <VBox.margin>
+            <Insets bottom="40.0" left="300.0" top="30.0" />
+         </VBox.margin>
+       </Button>
+   </children>
+</VBox>

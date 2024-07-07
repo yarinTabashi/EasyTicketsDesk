@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easyticketsdesk.Controllers.SearchController">
+    <stylesheets>
+        <URL value="@../styles.css" />
+    </stylesheets>
+    <children>
+      <VBox prefHeight="700.0" prefWidth="868.0">
+         <children>
+                <Label prefHeight="79.0" prefWidth="275.0" text="Good evening, First" textFill="#620463" wrapText="true">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                </Label>
+                <Label prefHeight="36.0" prefWidth="220.0" text="Search" wrapText="true">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                </Label>
+                <Label layoutX="33.0" layoutY="79.0" prefHeight="26.0" prefWidth="448.0" text="Let's look for a specific event, or filter by one of the features." wrapText="true">
+                    <font>
+                        <Font name="System Italic" size="17.0" />
+                    </font>
+                </Label>
+             <HBox prefHeight="38.0" prefWidth="587.0" spacing="10">
+                 <TextField fx:id="search_field" prefHeight="35.0" prefWidth="519.0" promptText="Enter event name" style="-fx-background-color: #f0e6f3; -fx-background-radius: 20px; -fx-padding: 5px;">
+                  <HBox.margin>
+                     <Insets bottom="20.0" />
+                  </HBox.margin>
+                  <font>
+                     <Font size="17.0" />
+                  </font></TextField>
+                 <Button fx:id="search_btn" layoutX="61.0" layoutY="386.0" mnemonicParsing="false" onMouseClicked="#searchClicked" prefHeight="37.0" prefWidth="216.0" styleClass="custom-button" text="Search" textFill="WHITE">
+                     <font>
+                         <Font size="13.0" />
+                     </font>
+                 </Button>
+                 <VBox.margin>
+                  <Insets left="120.0" right="120.0" top="20.0" />
+               </VBox.margin>
+             </HBox>
+             <HBox alignment="CENTER" prefHeight="47.0" prefWidth="640.0" spacing="10">
+               <VBox alignment="CENTER" prefHeight="43.0" prefWidth="164.0">
+                  <children>
+                     <Label text="Category" textFill="#13011b">
+                        <font>
+                           <Font name="System Bold" size="15.0" />
+                        </font></Label>
+                      <ChoiceBox fx:id="choiceBox" prefWidth="150.0" styleClass="custom-button">
+                          <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="category1" />
+                                  <String fx:value="category2" />
+                                  <String fx:value="category3" />
+                              </FXCollections>
+                          </items>
+                      </ChoiceBox>
+                  </children>
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+               </VBox>
+                 <VBox alignment="CENTER" prefHeight="43.0" prefWidth="164.0">
+                     <children>
+                         <Label text="Artist" textFill="#13011b">
+                             <font>
+                                 <Font name="System Bold" size="15.0" />
+                             </font></Label>
+                         <ChoiceBox prefWidth="150.0" styleClass="custom-button" />
+                     </children>
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+                 </VBox>
+                 <VBox alignment="CENTER" prefHeight="43.0" prefWidth="164.0">
+                     <children>
+                         <Label text="Date" textFill="#13011b">
+                             <font>
+                                 <Font name="System Bold" size="15.0" />
+                             </font></Label>
+                         <ChoiceBox prefWidth="150.0" styleClass="custom-button" />
+                     </children>
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+                 </VBox>
+                 <VBox.margin>
+                     <Insets left="120.0" right="120.0" />
+                 </VBox.margin>
+                 <VBox.margin>
+                     <Insets left="120.0" right="120.0" />
+                 </VBox.margin>
+                 <VBox.margin>
+                     <Insets left="120.0" right="120.0" />
+                 </VBox.margin>
+             </HBox>
+            <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" styleClass="custom-button" text="CLEAR" />
+             <ScrollPane layoutX="99.0" layoutY="253.0" prefHeight="344.0" prefWidth="768.0" HBox.hgrow="ALWAYS">
+                 <content>
+                     <VBox fx:id="ordersContainer" minWidth="-Infinity" prefHeight="339.0" prefWidth="707.0" spacing="20" />
+                 </content>
+               <VBox.margin>
+                  <Insets left="20.0" right="40.0" top="20.0" />
+               </VBox.margin>
+             </ScrollPane>
+         </children>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </VBox>
+    </children>
+</Pane>

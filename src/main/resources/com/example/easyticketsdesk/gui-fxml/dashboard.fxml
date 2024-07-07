@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easyticketsdesk.Controllers.DashboardController">
+    <stylesheets>
+        <URL value="@../styles.css" />
+    </stylesheets>
+    <children>
+      <VBox prefHeight="700.0" prefWidth="868.0">
+         <children>
+                <Label prefHeight="79.0" prefWidth="275.0" text="Good evening, First" textFill="#620463" wrapText="true">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                </Label>
+                <Label prefHeight="36.0" prefWidth="220.0" text="Upcoming Events" wrapText="true">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                </Label>
+                <ScrollPane prefHeight="270.0" prefWidth="775.0">
+                    <content>
+                        <HBox fx:id="cardsContainer" minWidth="-Infinity" prefHeight="250.0" spacing="20" />
+                    </content>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+                </ScrollPane>
+                <Label prefHeight="36.0" prefWidth="220.0" text="Artists" wrapText="true">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
+                </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                      <Pane prefHeight="147.0" prefWidth="141.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
+                          <children>
+                              <Label layoutX="24.0" layoutY="104.0" prefHeight="30.0" prefWidth="94.0" text="Eyal Golan" textAlignment="CENTER">
+                                  <font>
+                                      <Font name="Bell MT Italic" size="20.0" />
+                                  </font>
+                              </Label>
+                              <Pane layoutX="24.0" prefHeight="104.0" prefWidth="94.0" style="-fx-background-color: #906dbf; -fx-background-radius: 60;" />
+                          </children>
+                      </Pane>
+                      <Pane prefHeight="147.0" prefWidth="141.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
+                          <children>
+                              <Label layoutX="24.0" layoutY="104.0" prefHeight="30.0" prefWidth="105.0" text="Idan Raichel" textAlignment="CENTER">
+                                  <font>
+                                      <Font name="Bell MT Italic" size="20.0" />
+                                  </font>
+                              </Label>
+                              <Pane layoutX="24.0" prefHeight="104.0" prefWidth="94.0" style="-fx-background-color: #906dbf; -fx-background-radius: 60;" />
+                          </children>
+                      </Pane>
+                      <Pane prefHeight="147.0" prefWidth="141.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
+                          <children>
+                              <Label layoutX="24.0" layoutY="104.0" prefHeight="30.0" prefWidth="94.0" text="Eyal Golan" textAlignment="CENTER">
+                                  <font>
+                                      <Font name="Bell MT Italic" size="20.0" />
+                                  </font>
+                              </Label>
+                              <Pane layoutX="24.0" prefHeight="104.0" prefWidth="94.0" style="-fx-background-color: #906dbf; -fx-background-radius: 60;" />
+                          </children>
+                      </Pane>
+                      <Pane prefHeight="147.0" prefWidth="141.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
+                          <children>
+                              <Label layoutX="24.0" layoutY="104.0" prefHeight="30.0" prefWidth="105.0" text="Idan Raichel" textAlignment="CENTER">
+                                  <font>
+                                      <Font name="Bell MT Italic" size="20.0" />
+                                  </font>
+                              </Label>
+                              <Pane layoutX="24.0" prefHeight="104.0" prefWidth="94.0" style="-fx-background-color: #906dbf; -fx-background-radius: 60;" />
+                          </children>
+                      </Pane>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </VBox>
+    </children>
+</Pane>

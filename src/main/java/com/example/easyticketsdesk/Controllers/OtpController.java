@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 // TODO: Fix behavior to restrict each text field to one digit and auto-focus to the next field on input. UPDATE:FIXED!
 public class OtpController implements Initializable {
     @FXML
-    private BlankSign mainScreenController;
+    private MainSign mainScreenController;
     @FXML
     private TextField textField1;
 
@@ -27,7 +27,7 @@ public class OtpController implements Initializable {
         // Initialize method
     }
 
-    public void setMainScreenController(BlankSign mainScreenController) {
+    public void setMainScreenController(MainSign mainScreenController) {
         this.mainScreenController = mainScreenController;
     }
 

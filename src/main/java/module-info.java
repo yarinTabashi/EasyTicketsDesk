@@ -11,4 +11,6 @@ module com.example.easyticketsdesk {
     exports com.example.easyticketsdesk;
     exports com.example.easyticketsdesk.CustomComponents;
     opens com.example.easyticketsdesk.CustomComponents to javafx.fxml;
+    exports com.example.easyticketsdesk.Entities;
+    opens com.example.easyticketsdesk.Entities to javafx.fxml;
 }

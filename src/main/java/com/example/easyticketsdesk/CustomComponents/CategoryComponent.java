@@ -2,8 +2,8 @@ package com.example.easyticketsdesk.CustomComponents;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 
-public class CustomCategory extends Button {
-    public CustomCategory(String category_name) {
+public class CategoryComponent extends Button {
+    public CategoryComponent(String category_name) {
         super();
         setText(category_name);
         setFont(Font.font("System Bold", 25.0));
