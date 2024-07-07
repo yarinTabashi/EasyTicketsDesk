@@ -1,5 +1,5 @@
 package com.example.easyticketsdesk.Controllers;
-
+import com.example.easyticketsdesk.CustomComponents.CustomCategory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +29,41 @@ public class MyPreferncesController {
 
     @FXML
     private Button save_changes_btn;
+    @FXML
+    private Pane categories_pane;
+
+    @FXML
+    public void initialize() {
+        // Add CustomCategory buttons
+        CustomCategory category1 = new CustomCategory("Rock");
+        CustomCategory category2 = new CustomCategory("Rock");
+        CustomCategory category3 = new CustomCategory("Rock");
+        CustomCategory category4 = new CustomCategory("Rock");
+        CustomCategory category5 = new CustomCategory("Rock");
+        CustomCategory category6 = new CustomCategory("Rock");
+
+        // Set positions for the buttons (locate them in 2 lines)
+        category1.setLayoutX(50);
+        category1.setLayoutY(50);
+
+        category2.setLayoutX(200);
+        category2.setLayoutY(50);
+
+        category3.setLayoutX(350);
+        category3.setLayoutY(50);
+
+        category4.setLayoutX(50);
+        category4.setLayoutY(200);
+
+        category5.setLayoutX(200);
+        category5.setLayoutY(200);
+
+        category6.setLayoutX(350);
+        category6.setLayoutY(200);
+
+        // Add buttons to the pane
+        categories_pane.getChildren().addAll(category1, category2, category3, category4, category5, category6);
+    }
 
     @FXML
     void logoutClicked(MouseEvent event) {

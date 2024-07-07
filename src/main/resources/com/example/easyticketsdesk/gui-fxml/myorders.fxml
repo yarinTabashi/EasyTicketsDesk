@@ -1,224 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.control.ProgressBar?>
-<?import java.net.URL?>
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easyticketsdesk.Controllers.MyOrdersController">
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="868.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easyticketsdesk.Controllers.MyOrdersController">
    <stylesheets>
       <URL value="@../styles.css" />
    </stylesheets>
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="232.0" style="-fx-background-color: #ffffff;">
+      <VBox alignment="CENTER" layoutX="200.0" layoutY="74.0" prefHeight="104.0" prefWidth="451.0" style="-fx-background-color: #f5f6ff; -fx-background-radius: 50;">
          <children>
-            <Label text="EasyTicket" wrapText="true">
+            <Label alignment="TOP_LEFT" prefHeight="46.0" prefWidth="167.0" text="Time is ticking...">
                <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.5684210658073425" green="0.3368421196937561" blue="0.3368421196937561" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.9052631855010986" green="0.2279922068119049" blue="0.2279922068119049" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-               <VBox.margin>
-                  <Insets top="15.0" />
-               </VBox.margin>
-            </Label>
-            <Label text="Tickets - in easy..." wrapText="true">
-               <font>
-                  <Font name="System Italic" size="15.0" />
+                  <Font size="24.0" />
                </font>
             </Label>
-            <Text fill="#949494" strokeType="OUTSIDE" strokeWidth="0.0" text="________________________________" />
-            <Text fill="#efefef" strokeType="OUTSIDE" strokeWidth="0.0" text="________________________________">
-               <VBox.margin>
-                  <Insets top="80.0" />
-               </VBox.margin>
-            </Text>
-            <Label fx:id="menu_explore_btn" styleClass="menu-item" alignment="CENTER" prefHeight="37.0" prefWidth="194.0" text="Explore Events"/>
-            <Text fill="#efefef" strokeType="OUTSIDE" strokeWidth="0.0" text="________________________________" />
-            <Label fx:id="menu_my_tickets_btn" styleClass="menu-item" text="My tickets" />
-            <Text fill="#efefef" strokeType="OUTSIDE" strokeWidth="0.0" text="________________________________" />
-            <Label fx:id="menu_my_preferences_btn" prefHeight="37.0" prefWidth="194.0" styleClass="menu-item" text="My Preferences" />
-            <Text fill="#efefef" strokeType="OUTSIDE" strokeWidth="0.0" text="________________________________" />
-            <Pane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Label layoutX="88.0" layoutY="46.0" prefHeight="35.0" prefWidth="84.0" text="First Last" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="88.0" layoutY="75.0" prefHeight="35.0" prefWidth="114.0" text="first@gmail.com" textAlignment="CENTER">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="75.0" fitWidth="68.0" layoutX="11.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/abstract-user-flat-4.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="22.0" fitWidth="21.0" layoutX="193.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/logout.png" />
-                     </image>
-                  </ImageView>
-               </children>
-               <VBox.margin>
-                  <Insets top="150.0" />
-               </VBox.margin>
-            </Pane>
+            <ProgressBar prefHeight="35.0" prefWidth="401.0" progress="0.29" />
+            <Label alignment="TOP_LEFT" prefHeight="34.0" prefWidth="207.0" text="X days to your big event!">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
-      <Pane prefHeight="700.0" prefWidth="868.0" style="-fx-background-color: #f2f2f2;">
-         <children>
-            <ImageView fitHeight="45.0" fitWidth="43.0" layoutX="588.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <VBox alignment="CENTER" layoutX="200.0" layoutY="74.0" prefHeight="104.0" prefWidth="451.0" style="-fx-background-color: #f5f6ff; -fx-background-radius: 50;">
-               <children>
-                  <Label alignment="TOP_LEFT" prefHeight="46.0" prefWidth="167.0" text="Time is ticking...">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <ProgressBar prefHeight="35.0" prefWidth="401.0" progress="0.29" />
-                  <Label alignment="TOP_LEFT" prefHeight="34.0" prefWidth="207.0" text="X days to your big event!">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <Label layoutX="26.0" layoutY="19.0" prefHeight="36.0" prefWidth="141.0" text="My orders" wrapText="true">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-            <Pane layoutX="90.0" layoutY="235.0" prefHeight="173.0" prefWidth="674.0" style="-fx-background-color: #e2ccff; -fx-background-radius: 10;">
-               <children>
-                  <Label layoutX="345.0" layoutY="59.0" prefHeight="30.0" prefWidth="84.0" text="100 nis" textAlignment="CENTER">
-                     <font>
-                        <Font name="Bell MT" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="41.0" layoutY="91.0" prefHeight="30.0" prefWidth="131.0" text="Park Hayarkon" textAlignment="CENTER">
-                     <font>
-                        <Font name="Bell MT" size="15.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="41.0" layoutY="27.0" prefHeight="34.0" prefWidth="141.0" text="Eyal Golan" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Bell MT Bold" size="27.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="41.0" layoutY="121.0" prefHeight="30.0" prefWidth="131.0" text="05/07/2024" textAlignment="CENTER">
-                     <font>
-                        <Font name="Bell MT" size="15.0" />
-                     </font>
-                  </Label>
-                  <ImageView fx:id="qrCodeImageView" fitWidth="100" fitHeight="100" layoutX="551.0" layoutY="30.0" preserveRatio="true" />
-                  <Pane layoutX="218.0" layoutY="19.0" prefHeight="135.0" prefWidth="8.0" style="-fx-background-color: #906dbf; -fx-background-radius: 30;" />
-                  <Label layoutX="252.0" layoutY="29.0" prefHeight="30.0" prefWidth="84.0" text="Order date:" textAlignment="CENTER">
-                     <font>
-                        <Font name="Bell MT Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="345.0" layoutY="29.0" prefHeight="30.0" prefWidth="131.0" text="30/06/2024" textAlignment="CENTER">
-                     <font>
-                        <Font name="Bell MT" size="15.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="252.0" layoutY="59.0" prefHeight="30.0" prefWidth="84.0" text="Price:" textAlignment="CENTER">
-                     <font>
-                        <Font name="Bell MT Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <Pane layoutX="254.0" layoutY="104.0" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: #a4bd91; -fx-background-radius: 30;">
-                     <children>
-                        <Label layoutX="55.0" layoutY="9.0" text="Upcoming" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold Italic" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-               </children>
-            </Pane>
-            <Text fill="#949494" layoutX="77.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="_____________________________________________" wrappingWidth="697.0000000000001">
-               <font>
-                  <Font name="System Bold" size="37.0" />
-               </font>
-            </Text>
-            <Pane layoutX="88.0" layoutY="429.0" prefHeight="173.0" prefWidth="674.0" style="-fx-background-color: #e2ccff; -fx-background-radius: 10;">
-               <children>
-                  <Label layoutX="345.0" layoutY="59.0" prefHeight="30.0" prefWidth="84.0" text="100 nis" textAlignment="CENTER">
-                     <font>
-                        <Font name="Bell MT" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="41.0" layoutY="91.0" prefHeight="30.0" prefWidth="131.0" text="Park Hayarkon" textAlignment="CENTER">
-                     <font>
-                        <Font name="Bell MT" size="15.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="41.0" layoutY="27.0" prefHeight="34.0" prefWidth="141.0" text="Eyal Golan" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Bell MT Bold" size="27.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="41.0" layoutY="121.0" prefHeight="30.0" prefWidth="131.0" text="05/07/2024" textAlignment="CENTER">
-                     <font>
-                        <Font name="Bell MT" size="15.0" />
-                     </font>
-                  </Label>
-                  <ImageView fx:id="qrCodeImageView2" fitHeight="123.0" fitWidth="101.0" layoutX="551.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
-                  <Pane layoutX="218.0" layoutY="19.0" prefHeight="135.0" prefWidth="8.0" style="-fx-background-color: #906dbf; -fx-background-radius: 30;" />
-                  <Label layoutX="252.0" layoutY="29.0" prefHeight="30.0" prefWidth="84.0" text="Order date:" textAlignment="CENTER">
-                     <font>
-                        <Font name="Bell MT Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="345.0" layoutY="29.0" prefHeight="30.0" prefWidth="131.0" text="30/06/2024" textAlignment="CENTER">
-                     <font>
-                        <Font name="Bell MT" size="15.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="252.0" layoutY="59.0" prefHeight="30.0" prefWidth="84.0" text="Price:" textAlignment="CENTER">
-                     <font>
-                        <Font name="Bell MT Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <Pane layoutX="262.0" layoutY="104.0" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: #cf959d; -fx-background-radius: 30;">
-                     <children>
-                        <Label layoutX="71.0" layoutY="8.0" text="Past" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold Italic" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-               </children>
-            </Pane>
-         </children>
-      </Pane>
+      <Label layoutX="26.0" layoutY="19.0" prefHeight="36.0" prefWidth="141.0" text="My orders" wrapText="true">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Text fill="#949494" layoutX="77.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="_____________________________________________" wrappingWidth="697.0000000000001">
+         <font>
+            <Font name="System Bold" size="37.0" />
+         </font>
+      </Text>
+      <ScrollPane layoutX="99.0" layoutY="253.0" prefHeight="270.0" prefWidth="654.0" HBox.hgrow="ALWAYS">
+         <content>
+            <VBox fx:id="ordersContainer" minWidth="-Infinity" prefHeight="262.0" prefWidth="631.0" spacing="20" />
+         </content>
+      </ScrollPane>
    </children>
-</HBox>
+</Pane>
