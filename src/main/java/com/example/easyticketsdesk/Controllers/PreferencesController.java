@@ -1,17 +1,27 @@
 package com.example.easyticketsdesk.Controllers;
 import com.example.easyticketsdesk.CustomComponents.CategoryComponent;
+import com.example.easyticketsdesk.RequestsUtility;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 public class PreferencesController {
     @FXML
+    private MainWindowController mainWindowController;
+    @FXML
     private Button save_changes_btn;
     @FXML
     private GridPane categories_container;
 
+    public void setMainScreenController(MainWindowController mainWindowController) {
+        this.mainWindowController = mainWindowController;
+    }
+
     @FXML
     public void initialize() {
+        //RequestsUtility.getUserPreferences(mainWindowController.GetJwt());
+
         // Add CustomCategory buttons
         CategoryComponent category1 = new CategoryComponent("Rock");
         CategoryComponent category2 = new CategoryComponent("Rock");

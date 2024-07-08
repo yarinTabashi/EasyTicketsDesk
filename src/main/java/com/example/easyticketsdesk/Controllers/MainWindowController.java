@@ -23,6 +23,7 @@ public class MainWindowController {
     private Label search_btn;
     @FXML
     private ImageView edit_profile_icon;
+    private String currentJWT;
 
     @FXML
     public void initialize() {
@@ -102,12 +103,24 @@ public class MainWindowController {
     public void load_preferences(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/preferences.fxml"));
-            Parent signInRoot = loader.load();
+            Parent preferencesRoot = loader.load();
+
+            PreferencesController preferencesController = loader.getController();
+            preferencesController.setMainScreenController(this);
 
             // Set the right content of border_pane to signInRoot
-            border_pane.setRight(signInRoot);
+            border_pane.setRight(preferencesRoot);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public void SetJwt(String token){
+        this.currentJWT = token;
+    }
+
+    public String GetJwt(){
+        return this.currentJWT;
+    }
+
 }

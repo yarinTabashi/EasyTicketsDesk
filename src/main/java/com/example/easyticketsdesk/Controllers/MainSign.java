@@ -8,6 +8,7 @@ import java.io.IOException;
 public class MainSign {
     @FXML
     private BorderPane border_pane;
+    private String currentJWT;
 
     @FXML
     public void initialize() {

@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 public class SignInController {
@@ -40,21 +43,21 @@ public class SignInController {
     void signInBtnClicked(MouseEvent event) {
         if (validateFields()) {
             // Proceed with login logic and scene switching
-            RequestsUtility.LoginResponse loginResponse = RequestsUtility.login(email_field.getText(), password_field.getText());
-            if (loginResponse == null){
+            JSONObject jsonObject = RequestsUtility.login(email_field.getText(), password_field.getText());
+            if (jsonObject == null){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Login failed");
                 alert.setContentText("Make sure the properties are ok");
-                alert.showAndWait().ifPresent(rs -> {
-                    if (rs == ButtonType.OK) {
-                        System.out.println("Pressed OK.");
-                    }
-                });
+                alert.showAndWait();
             }
             else {
-                System.out.println(loginResponse.getEmail());
-                System.out.println(loginResponse.getToken());
-                switchToMainWindow();
+                try {
+                    System.out.println(jsonObject.getString("email"));
+                    System.out.println(jsonObject.getString("token"));
+                    switchToMainWindow(jsonObject.getString("token"));
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
@@ -95,12 +98,18 @@ public class SignInController {
         alert.showAndWait();
     }
 
-    private void switchToMainWindow() {
+    private void switchToMainWindow(String currentJwt) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/main_window.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
 
+            // Access the controller instance
+            MainWindowController controller = loader.getController();
+
+            // Pass currentJwt to the controller
+            controller.SetJwt(currentJwt);
+
+            Scene scene = new Scene(root);
             Stage stage = (Stage) signin_btn.getScene().getWindow();
             stage.setScene(scene);
             stage.show();

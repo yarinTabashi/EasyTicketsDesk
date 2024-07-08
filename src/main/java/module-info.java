@@ -5,6 +5,8 @@ module com.example.easyticketsdesk {
     requires com.google.zxing;
     requires java.desktop;
     requires com.google.zxing.javase;
+    requires com.fasterxml.jackson.databind;
+    requires android.json;
     opens com.example.easyticketsdesk to javafx.fxml;
     exports com.example.easyticketsdesk.Controllers;
     opens com.example.easyticketsdesk.Controllers to javafx.fxml;

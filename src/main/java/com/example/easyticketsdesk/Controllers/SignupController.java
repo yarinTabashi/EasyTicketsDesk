@@ -1,4 +1,5 @@
 package com.example.easyticketsdesk.Controllers;
+import com.example.easyticketsdesk.RequestsUtility;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -50,9 +51,19 @@ public class SignupController {
 
     @FXML
     void signup_clicked(MouseEvent event) {
-        //if (validateFields()) {
-            mainScreenController.loadOTP();
-        //}
+        if (validateFields()) {
+            boolean succeed = RequestsUtility.register(first_name_field.getText(), last_name_field.getText(), email_field.getText(), password_field.getText());
+            if (succeed){
+                System.out.println("Succeed. Now move to verify your email (OTP)");
+                //mainScreenController.loadOTP();
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Register failed");
+                alert.setContentText("An error occurred while registration");
+                alert.showAndWait();
+            }
+        }
     }
 
     public void setMainScreenController(MainSign mainScreenController) {
