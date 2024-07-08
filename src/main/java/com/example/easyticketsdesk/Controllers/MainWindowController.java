@@ -107,6 +107,7 @@ public class MainWindowController {
 
             PreferencesController preferencesController = loader.getController();
             preferencesController.setMainScreenController(this);
+            preferencesController.initializeComponents();
 
             // Set the right content of border_pane to signInRoot
             border_pane.setRight(preferencesRoot);

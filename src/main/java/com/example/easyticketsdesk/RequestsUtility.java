@@ -2,7 +2,11 @@ package com.example.easyticketsdesk;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import org.json.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class RequestsUtility {
     private static final String MAIN_URL = "http://localhost:8080";
@@ -102,7 +106,7 @@ public class RequestsUtility {
         return false;
     }
 
-    public static JSONObject getUserPreferences(String token) {
+    public static Map<String, Boolean> getUserPreferences(String token) {
         HttpURLConnection connection = null;
         try {
             // Create connection
@@ -123,7 +127,10 @@ public class RequestsUtility {
                     while ((line = in.readLine()) != null) {
                         response.append(line);
                     }
-                    return new JSONObject(response.toString());
+                    JSONObject jsonResponse = new JSONObject(response.toString());
+                    return convertJsonToMap(jsonResponse);
+                } catch (IOException | RuntimeException e) {
+                    throw new RuntimeException("Error reading response", e);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -131,12 +138,28 @@ public class RequestsUtility {
                 System.err.println("HTTP error code: " + responseCode);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error making HTTP request", e);
         } finally {
             if (connection != null) {
                 connection.disconnect();
             }
         }
         return null;
+    }
+
+    private static Map<String, Boolean> convertJsonToMap(JSONObject jsonObject) {
+        Map<String, Boolean> map = new HashMap<>();
+        Iterator<String> keys = jsonObject.keys();
+        while (keys.hasNext()) {
+            String key = keys.next();
+            try {
+                boolean value = jsonObject.getBoolean(key);
+                map.put(key, value);
+            } catch (JSONException e) {
+                // Handle JSONException appropriately
+                e.printStackTrace();
+            }
+        }
+        return map;
     }
 }

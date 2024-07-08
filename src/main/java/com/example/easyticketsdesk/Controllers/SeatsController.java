@@ -41,7 +41,10 @@ public class SeatsController {
                 if (row==1){
                     seatStatus = SeatStatus.RESERVED;
                 }
-                 currentSeat = new SeatComponent(seatStatus);
+                currentSeat = new SeatComponent(seatStatus);
+
+                //final SeatComponent currentSeat = new SeatComponent(seatStatus);
+                //currentSeat.setOnMouseClicked(event -> handleSeatClick(currentSeat));
 
                 // Set preferred size (adjust as needed)
                 currentSeat.setPrefSize(80, 30);
@@ -55,6 +58,10 @@ public class SeatsController {
             }
         }
     }
+
+//    private void handleSeatClick(SeatComponent seatComponent) {
+//
+//    }
 
     public void reserve_clicked(MouseEvent mouseEvent) {
         System.out.println("Reserved clicked");

@@ -1,5 +1,7 @@
 package com.example.easyticketsdesk.CustomComponents;
+import com.example.easyticketsdesk.Controllers.SeatsController;
 import com.example.easyticketsdesk.Entities.SeatStatus;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public class SeatComponent extends Button {

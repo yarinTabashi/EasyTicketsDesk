@@ -1,10 +1,12 @@
 package com.example.easyticketsdesk.Controllers;
 import com.example.easyticketsdesk.CustomComponents.CategoryComponent;
 import com.example.easyticketsdesk.RequestsUtility;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PreferencesController {
     @FXML
@@ -14,45 +16,61 @@ public class PreferencesController {
     @FXML
     private GridPane categories_container;
 
+    @FXML
+    public void initialize(){
+        //this.categories_container = new GridPane();
+    }
+
     public void setMainScreenController(MainWindowController mainWindowController) {
         this.mainWindowController = mainWindowController;
     }
 
-    @FXML
-    public void initialize() {
-        //RequestsUtility.getUserPreferences(mainWindowController.GetJwt());
+    private void createCategoryComponents(Map<String, Boolean> preferencesMap) {
+        int col = 0;
+        int row = 0;
 
-        // Add CustomCategory buttons
-        CategoryComponent category1 = new CategoryComponent("Rock");
-        CategoryComponent category2 = new CategoryComponent("Rock");
-        CategoryComponent category3 = new CategoryComponent("Rock");
-        CategoryComponent category4 = new CategoryComponent("Rock");
-        CategoryComponent category5 = new CategoryComponent("Rock");
-        CategoryComponent category6 = new CategoryComponent("Rock");
+        for (Map.Entry<String, Boolean> category : preferencesMap.entrySet()) {
+            String categoryName = category.getKey();
+            boolean categoryValue = category.getValue();
 
-        // Set positions for the buttons (locate them in 2 lines)
-        category1.setLayoutX(50);
-        category1.setLayoutY(50);
+            CategoryComponent categoryComponent = new CategoryComponent(categoryName, categoryValue);
 
-        category2.setLayoutX(200);
-        category2.setLayoutY(50);
+            // Set positions dynamically based on row and col indices
+            categoryComponent.setLayoutX(50 + col * 150); // Adjust X position as needed
+            categoryComponent.setLayoutY(50 + row * 150); // Adjust Y position as needed
 
-        category3.setLayoutX(350);
-        category3.setLayoutY(50);
+            // Add categoryComponent to categories_container
+            categories_container.add(categoryComponent, col, row);
 
-        category4.setLayoutX(50);
-        category4.setLayoutY(200);
-
-        category5.setLayoutX(200);
-        category5.setLayoutY(200);
-
-        category6.setLayoutX(350);
-        category6.setLayoutY(200);
-
-        for (int row = 0; row < 2; row++) {
-            for (int col = 0; col < 3; col++) {
-                categories_container.add(new CategoryComponent("dssd"), col, row);
+            // Update col and row indices for next position
+            col++;
+            if (col >= 3) { // Assuming 3 columns per row
+                col = 0; // Reset column index
+                row++; // Move to the next row
             }
         }
+    }
+
+    @FXML
+    private void save_btn_clicked(MouseEvent event) {
+        Map<String, Boolean> preferencesMap = new HashMap<>();
+
+        for (int i = 0; i < categories_container.getChildren().size(); i++) {
+            CategoryComponent categoryComponent = (CategoryComponent) categories_container.getChildren().get(i);
+
+            // Assuming categoryComponent has a method isSelected() to get its boolean value
+            boolean selected = categoryComponent.isSelected();
+            String categoryName = categoryComponent.getCategoryName(); // Replace with appropriate method
+
+            preferencesMap.put(categoryName, selected);
+        }
+
+        // TODO: Save this preferencesMap to the db by UPDATE request
+        System.out.println("Preferences Saved: " + preferencesMap);
+    }
+
+    public void initializeComponents() {
+        Map<String, Boolean> preferencesMap = RequestsUtility.getUserPreferences(mainWindowController.GetJwt());
+        createCategoryComponents(preferencesMap);
     }
 }

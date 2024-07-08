@@ -1,25 +1,55 @@
 package com.example.easyticketsdesk.CustomComponents;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
+import java.util.Map;
 
 public class CategoryComponent extends Button {
-    public CategoryComponent(String category_name) {
+    private String categoryName;
+    private Boolean isSelected;
+
+    public CategoryComponent(String category_name, Boolean isSelected) {
         super();
+        this.categoryName = category_name;
         setText(category_name);
         setFont(Font.font("System Bold", 25.0));
         setPrefWidth(129.0);
         setPrefHeight(131.0);
-        setStyle("-fx-background-color: #a4bd91; -fx-background-radius: 50;");
 
-        // Apply hover effect using CSS pseudoclasses
-        setOnMouseEntered(e -> setStyle("-fx-background-color: #85a96e; -fx-background-radius: 50;"));
-        setOnMouseExited(e -> setStyle("-fx-background-color: #a4bd91; -fx-background-radius: 50;"));
+        if (isSelected){
+            setSelected();
+        }
+        else {
+            setUnselected();
+        }
+
         // Handle click event
         setOnAction(e -> handleClick());
     }
 
+    public void setSelected(){
+        this.isSelected = true;
+        setStyle("-fx-background-color: #544c8c; -fx-background-radius: 50;"); // Selected
+    }
+
+    public void setUnselected(){
+        this.isSelected = false;
+        setStyle("-fx-background-color: #9a93c9; -fx-background-radius: 50;"); // Unselected
+    }
+
     private void handleClick() {
-        System.out.println("Button clicked: " + getText());
-        // Add your custom logic here for handling the click event
+        if (this.isSelected){
+            setUnselected();
+        }
+        else{
+            setSelected();
+        }
+    }
+
+    public boolean isSelected(){
+        return this.isSelected;
+    }
+
+    public String getCategoryName() {
+        return this.categoryName;
     }
 }

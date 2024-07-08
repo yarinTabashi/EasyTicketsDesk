@@ -42,7 +42,7 @@
                   <Insets top="60.0" />
                </VBox.margin>
             </GridPane>
-             <Button fx:id="save_changes_btn" alignment="CENTER" layoutX="314.0" layoutY="572.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="268.0" style="-fx-background-radius: 20; -fx-background-color: #301257;" text="Save Changes" textAlignment="CENTER" textFill="WHITE">
+             <Button fx:id="save_changes_btn" onMouseClicked="#save_btn_clicked" alignment="CENTER" layoutX="314.0" layoutY="572.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="268.0" style="-fx-background-radius: 20; -fx-background-color: #301257;" text="Save Changes" textAlignment="CENTER" textFill="WHITE">
                  <font>
                      <Font name="System Bold" size="14.0" />
                  </font>
