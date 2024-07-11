@@ -42,7 +42,7 @@
             <Font size="20.0" /> <!-- Set the desired font size -->
          </font>
       </TextField>
-      <Button layoutX="112.0" layoutY="340.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="136.0" text="Submit" styleClass="custom-button" />
+      <Button layoutX="112.0" layoutY="340.0" fx:id="submit_btn" onMouseClicked="#submit_clicked" mnemonicParsing="false" prefHeight="38.0" prefWidth="136.0" text="Submit" styleClass="custom-button" />
       <Label layoutX="113.0" layoutY="391.0" text="--Warnning label--" textFill="#d90000">
          <font>
             <Font size="16.0" />

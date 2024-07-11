@@ -1,13 +1,18 @@
 package com.example.easyticketsdesk.Controllers;
+import com.example.easyticketsdesk.RequestsUtility;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
 // TODO: Fix behavior to restrict each text field to one digit and auto-focus to the next field on input. UPDATE:FIXED!
 public class OtpController implements Initializable {
+    public Button submit_btn;
     @FXML
     private MainSign mainScreenController;
     @FXML
@@ -65,6 +70,16 @@ public class OtpController implements Initializable {
                 break;
             default:
                 break;
+        }
+    }
+
+    public void submit_clicked(MouseEvent mouseEvent) {
+        String otpString = textField1.getText() + textField2.getText() + textField3.getText() + textField4.getText();
+        try {
+            int otp = Integer.parseInt(otpString);
+            RequestsUtility.verifyOTP("yafa@gmail.com", otp);
+        } catch (NumberFormatException e) {
+            System.err.println("Error converting OTP to integer. " + e.getMessage());
         }
     }
 }

@@ -162,4 +162,86 @@ public class RequestsUtility {
         }
         return map;
     }
+
+    public static boolean sendOTP(String email) {
+        HttpURLConnection connection = null;
+        try {
+            // Create connection
+            URL url = new URL(MAIN_URL + AUTH_URL + "/send-otp");
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // Enable output and disable caching
+            connection.setDoOutput(true);
+            connection.setUseCaches(false);
+
+            // Create JSON payload
+            String jsonInputString =email;
+
+            // Send request
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            // Get Response
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK){
+                return true;
+            }
+            else {
+                System.err.println("HTTP error code: " + responseCode);
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+        return false;
+    }
+
+    public static boolean verifyOTP(String email, Integer otp) {
+        HttpURLConnection connection = null;
+        try {
+            // Create connection
+            URL url = new URL(MAIN_URL + AUTH_URL + "/verify-otp");
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+
+            // Create JSON payload
+            JSONObject jsonInput = new JSONObject();
+            jsonInput.put("email", email);
+            jsonInput.put("otp", otp);
+
+            // Send request
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = jsonInput.toString().getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            // Get Response
+            int responseCode = connection.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Read response
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    String response = in.readLine(); // Assuming response is a single line JSON like "true" or "false"
+                    return Boolean.parseBoolean(response); // Convert response to boolean
+                }
+            } else {
+                System.err.println("HTTP error code: " + responseCode);
+            }
+        } catch (IOException | JSONException e) {
+            throw new RuntimeException("Error making HTTP request", e);
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+        return false;
+    }
 }

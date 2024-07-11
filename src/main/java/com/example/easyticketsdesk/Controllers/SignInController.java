@@ -36,7 +36,8 @@ public class SignInController {
     @FXML
     void forgotPasswordClicked(MouseEvent event) {
         // TODO: Need to firstly go to the OTP and then to create new password.
-        mainScreenController.loadForgotPassword();
+        RequestsUtility.sendOTP(this.email_field.getText());
+        mainScreenController.loadOTP();
     }
 
     @FXML
