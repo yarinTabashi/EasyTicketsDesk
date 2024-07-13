@@ -1,9 +1,11 @@
 package com.example.easyticketsdesk;
 import java.io.*;
 import java.net.*;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
+
+import com.example.easyticketsdesk.Entities.Event;
+import com.example.easyticketsdesk.Entities.UserProfile;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -237,5 +239,153 @@ public class RequestsUtility {
             }
         }
         return null;
+    }
+
+    public static void setUserPreferencesMapping(String token, Map<String, Boolean> preferencesMap) {
+        HttpURLConnection connection = null;
+        try {
+            // Create connection
+            URL url = new URL(MAIN_URL + "/preferences/map");
+            connection = (HttpURLConnection) url.openConnection();
+
+            // Set request method and headers
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Authorization", "Bearer " + token);
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // Enable output and set request body
+            connection.setDoOutput(true);
+            try (OutputStream os = connection.getOutputStream();
+                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"))) {
+                JSONObject jsonRequest = convertMapToJson(preferencesMap);
+                writer.write(jsonRequest.toString());
+                writer.flush();
+            }
+
+            // Get Response
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                System.out.println("Preferences updated successfully");
+            } else {
+                System.err.println("HTTP error code: " + responseCode);
+            }
+        } catch (IOException | JSONException e) {
+            throw new RuntimeException("Error making HTTP request", e);
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
+    // Helper method to convert Map<String, Boolean> to JSONObject
+    private static JSONObject convertMapToJson(Map<String, Boolean> map) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        for (Map.Entry<String, Boolean> entry : map.entrySet()) {
+            jsonObject.put(entry.getKey(), entry.getValue());
+        }
+        return jsonObject;
+    }
+
+    public static UserProfile getUserProfile(String token) {
+        HttpURLConnection connection = null;
+        try {
+            // Create connection
+            URL url = new URL(MAIN_URL + "/profile");
+            connection = (HttpURLConnection) url.openConnection();
+
+            // Set request method and headers
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Authorization", "Bearer " + token);
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // Get Response
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = in.readLine()) != null) {
+                        response.append(line);
+                    }
+                    JSONObject jsonResponse = new JSONObject(response.toString());
+                    return new UserProfile(
+                            jsonResponse.getString("first_name"),
+                            jsonResponse.getString("last_name"),
+                            jsonResponse.getString("email"),
+                            jsonResponse.getString("jwt")
+                    );
+                } catch (IOException e) {
+                    throw new RuntimeException("Error reading response", e);
+                } catch (JSONException e) {
+                    throw new RuntimeException("Error parsing JSON response", e);
+                }
+            } else {
+                System.err.println("HTTP error code: " + responseCode);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error making HTTP request", e);
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+        return null;
+    }
+
+    public static List<Event> getUpcomingEvents(String token) {
+        HttpURLConnection connection = null;
+        List<Event> events = new ArrayList<>();
+
+        try {
+            // Create connection
+            URL url = new URL(MAIN_URL + "/events/possible");
+            connection = (HttpURLConnection) url.openConnection();
+
+            // Set request method and headers
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Authorization", "Bearer " + token);
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // Get Response
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = in.readLine()) != null) {
+                        response.append(line);
+                    }
+                    JSONArray jsonArray = new JSONArray(response.toString());
+
+                    // Parse JSON Array into List<Event>
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        try
+                        {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Event event = new Event(jsonObject);
+                            events.add(event);
+                        }
+                        catch (Exception e){
+                            System.err.println("Error occurred while trying parsing the json object to Event.");
+                        }
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException("Error reading response", e);
+                } catch (JSONException e) {
+                    throw new RuntimeException("Error parsing JSON response", e);
+                }
+            } else {
+                System.err.println("HTTP error code: " + responseCode);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error making HTTP request", e);
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+
+        return events;
     }
 }

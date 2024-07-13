@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
 <?import java.net.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easyticketsdesk.Controllers.SearchController">
     <stylesheets>
@@ -14,7 +15,7 @@
     <children>
       <VBox prefHeight="700.0" prefWidth="868.0">
          <children>
-                <Label prefHeight="79.0" prefWidth="275.0" text="Good evening, First" textFill="#620463" wrapText="true">
+                <Label fx:id="welcome_label" prefHeight="79.0" prefWidth="275.0" text="Good evening, First" textFill="#620463" wrapText="true">
                     <font>
                         <Font name="System Bold" size="25.0" />
                     </font>

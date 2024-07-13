@@ -13,7 +13,7 @@
     <children>
       <VBox prefHeight="700.0" prefWidth="868.0">
          <children>
-                <Label prefHeight="79.0" prefWidth="275.0" text="Good evening, First" textFill="#620463" wrapText="true">
+                <Label fx:id="welcome_label" prefHeight="79.0" prefWidth="275.0" text="Good evening, First" textFill="#620463" wrapText="true">
                     <font>
                         <Font name="System Bold" size="25.0" />
                     </font>

@@ -1,23 +1,45 @@
 package com.example.easyticketsdesk.Entities;
-import java.util.Date;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event {
     private Long eventId;
     private String eventName;
     private String venue;
-    private Date date;
+    private String description;
+    private LocalDateTime date;
     private Category category;
 
     public Event(){
 
     }
 
-    public Event(Long eventId, String eventName, String venue, Date date, Category category) {
+    public Event(Long eventId, String eventName, String description, String venue, LocalDateTime date, Category category) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.venue = venue;
+        this.description = description;
         this.date = date;
         this.category = category;
+    }
+
+    public Event(JSONObject jsonObject) throws JSONException {
+        this.eventId = jsonObject.getLong("id");
+        this.eventName = jsonObject.getString("name");
+        this.venue = jsonObject.getString("venue");
+        this.description = jsonObject.getString("description");
+
+        // Parse date string using DateTimeFormatter
+        String dateStr = jsonObject.getString("date");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        this.date = LocalDateTime.parse(dateStr, formatter);
+
+        // Parse category (assuming Category class exists and has a constructor that accepts JSONObject)
+        JSONObject categoryObject = jsonObject.getJSONObject("category");
+        this.category = null;
+        //this.category = new Category(categoryObject);
     }
 
     public Long getEventId() {
@@ -44,11 +66,15 @@ public class Event {
         this.venue = venue;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public String getDateFormat() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy | HH:mm");
+        return this.date.format(formatter);
+    }
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -58,5 +84,13 @@ public class Event {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

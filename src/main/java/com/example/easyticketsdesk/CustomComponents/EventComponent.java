@@ -1,5 +1,7 @@
 package com.example.easyticketsdesk.CustomComponents;
 import com.example.easyticketsdesk.Controllers.MainSign;
+import com.example.easyticketsdesk.Controllers.MainWindowController;
+import com.example.easyticketsdesk.Entities.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,9 +19,12 @@ import java.io.IOException;
 
 public class EventComponent extends VBox {
     @FXML
+    private MainWindowController mainWindowController;
+    private Event event;
+    @FXML
     private Pane image_pane;
     @FXML
-    private Label event_name_label;
+    private Label name_label;
 
     @FXML
     private Label price_label;
@@ -49,28 +54,24 @@ public class EventComponent extends VBox {
         });
     }
 
+    public void setMainWindowController(MainWindowController mainWindowController, Event event) {
+        this.mainWindowController = mainWindowController;
+        this.event = event;
+    }
+
+    public void setEventDetails(String eventName, String venue, String eventDate){
+        this.name_label.setText(eventName);
+        this.venue_label.setText(venue);
+        this.date_label.setText(eventDate);
+    }
+
     private void handle_event_card_clicked() {
-        try {
-            // Load the FXML file for seat selection
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/seats.fxml"));
-            Parent root = loader.load();
-
-            // Create a new stage
-            Stage stage = new Stage();
-            stage.setTitle("Seat Selection");
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace(); // Handle the exception appropriately
-        }
+        this.mainWindowController.load_seats_screen(event);
     }
 
 
     public void setEventName(String eventName) {
-        event_name_label.setText(eventName);
+        name_label.setText(eventName);
     }
 
     public void setPrice(String price) {

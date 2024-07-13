@@ -13,7 +13,7 @@
             <Insets />
          </VBox.margin>
       </Pane>
-      <Label fx:id="event_name_label" prefWidth="206.0" text="Eyal Golan" textFill="#ffffff">
+      <Label fx:id="name_label" prefWidth="206.0" text="Eyal Golan" textFill="#ffffff">
          <font>
             <Font name="System Bold" size="29.0" />
          </font>

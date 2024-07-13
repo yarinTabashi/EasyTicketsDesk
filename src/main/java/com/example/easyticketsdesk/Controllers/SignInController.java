@@ -1,4 +1,5 @@
 package com.example.easyticketsdesk.Controllers;
+import com.example.easyticketsdesk.Entities.UserProfile;
 import com.example.easyticketsdesk.RequestsUtility;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -104,8 +105,10 @@ public class SignInController {
             // Access the controller instance
             MainWindowController controller = loader.getController();
 
-            // Pass currentJwt to the controller
-            controller.SetJwt(currentJwt);
+            // Pass currentJwt to the controller and load user details
+            UserProfile userProfile = RequestsUtility.getUserProfile(currentJwt);
+            controller.SetUserData(userProfile);
+            controller.load_dashboard();
 
             Scene scene = new Scene(root);
             Stage stage = (Stage) signin_btn.getScene().getWindow();

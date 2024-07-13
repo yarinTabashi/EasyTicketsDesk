@@ -60,12 +60,12 @@
                <Text fill="#efefef" strokeType="OUTSIDE" strokeWidth="0.0" text="________________________________" />
                <Pane prefHeight="200.0" prefWidth="200.0">
                    <children>
-                       <Label layoutX="88.0" layoutY="4.0" prefHeight="35.0" prefWidth="84.0" text="First Last" textAlignment="CENTER">
+                       <Label fx:id="name_label" layoutX="88.0" layoutY="4.0" prefHeight="35.0" prefWidth="109.0" text="First Last" textAlignment="CENTER">
                            <font>
                                <Font name="System Bold" size="18.0" />
                            </font>
                        </Label>
-                       <Label layoutX="88.0" layoutY="33.0" prefHeight="35.0" prefWidth="114.0" text="first@gmail.com" textAlignment="CENTER">
+                       <Label fx:id="email_label" layoutX="88.0" layoutY="33.0" prefHeight="35.0" prefWidth="114.0" text="first@gmail.com" textAlignment="CENTER">
                            <font>
                                <Font size="11.0" />
                            </font>
@@ -75,7 +75,7 @@
                                <Image url="@../icons/abstract-user-flat-4.png" />
                            </image>
                        </ImageView>
-                       <ImageView fx:id="edit_profile_icon" fitHeight="22.0" fitWidth="21.0" layoutX="193.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                       <ImageView fx:id="edit_profile_icon" fitHeight="22.0" fitWidth="21.0" layoutX="193.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#edit_profile_clicked">
                            <image>
                                <Image url="@../icons/edit-icon.png" />
                            </image>

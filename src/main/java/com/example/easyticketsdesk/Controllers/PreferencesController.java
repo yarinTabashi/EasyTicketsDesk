@@ -3,6 +3,7 @@ import com.example.easyticketsdesk.CustomComponents.CategoryComponent;
 import com.example.easyticketsdesk.RequestsUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import java.util.HashMap;
@@ -15,10 +16,10 @@ public class PreferencesController {
     private Button save_changes_btn;
     @FXML
     private GridPane categories_container;
-
+    @FXML
+    private Label welcome_label;
     @FXML
     public void initialize(){
-        //this.categories_container = new GridPane();
     }
 
     public void setMainScreenController(MainWindowController mainWindowController) {
@@ -58,19 +59,20 @@ public class PreferencesController {
         for (int i = 0; i < categories_container.getChildren().size(); i++) {
             CategoryComponent categoryComponent = (CategoryComponent) categories_container.getChildren().get(i);
 
-            // Assuming categoryComponent has a method isSelected() to get its boolean value
             boolean selected = categoryComponent.isSelected();
-            String categoryName = categoryComponent.getCategoryName(); // Replace with appropriate method
+            String categoryName = categoryComponent.getCategoryName();
 
             preferencesMap.put(categoryName, selected);
         }
 
         // TODO: Save this preferencesMap to the db by UPDATE request
+        RequestsUtility.setUserPreferencesMapping(mainWindowController.getJwt(), preferencesMap);
         System.out.println("Preferences Saved: " + preferencesMap);
     }
 
     public void initializeComponents() {
-        Map<String, Boolean> preferencesMap = RequestsUtility.getUserPreferences(mainWindowController.GetJwt());
+        this.welcome_label.setText(mainWindowController.getWelcomeText());
+        Map<String, Boolean> preferencesMap = RequestsUtility.getUserPreferences(mainWindowController.getJwt());
         createCategoryComponents(preferencesMap);
     }
 }

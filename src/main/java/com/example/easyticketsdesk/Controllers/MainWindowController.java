@@ -1,4 +1,6 @@
 package com.example.easyticketsdesk.Controllers;
+import com.example.easyticketsdesk.Entities.Event;
+import com.example.easyticketsdesk.Entities.UserProfile;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,11 +9,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import java.io.IOException;
+import java.time.LocalTime;
 
 public class MainWindowController {
     @FXML
     private BorderPane border_pane;
-
+    @FXML
+    private Label name_label;
+    @FXML
+    private Label email_label;
+    private UserProfile userProfile;
     // Menu buttons
     @FXML
     private Label explore_btn;
@@ -23,12 +30,11 @@ public class MainWindowController {
     private Label search_btn;
     @FXML
     private ImageView edit_profile_icon;
-    private String currentJWT;
 
     @FXML
     public void initialize() {
         activateAndInactivate(explore_btn);
-        load_dashboard();
+        //load_dashboard();
     }
 
     @FXML
@@ -67,10 +73,14 @@ public class MainWindowController {
     public void load_search(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/search.fxml"));
-            Parent signInRoot = loader.load();
+            Parent searchRoot = loader.load();
+
+            SearchController searchController = loader.getController();
+            searchController.setMainWindowController(this);
+            searchController.initializeScreen();
 
             // Set the right content of border_pane to signInRoot
-            border_pane.setRight(signInRoot);
+            border_pane.setRight(searchRoot);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,10 +89,14 @@ public class MainWindowController {
     public void load_dashboard(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/dashboard.fxml"));
-            Parent signInRoot = loader.load();
+            Parent dashboardRoot = loader.load();
+
+            DashboardController dashboardController = loader.getController();
+            dashboardController.setMainScreenController(this);
+            dashboardController.set_upcoming_events();
 
             // Set the right content of border_pane to signInRoot
-            border_pane.setRight(signInRoot);
+            border_pane.setRight(dashboardRoot);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -116,12 +130,62 @@ public class MainWindowController {
         }
     }
 
-    public void SetJwt(String token){
-        this.currentJWT = token;
+    public String getJwt(){
+        return this.userProfile.getJwt();
     }
 
-    public String GetJwt(){
-        return this.currentJWT;
+    public void SetUserData(UserProfile userProfile) {
+        this.userProfile = userProfile;
+        this.name_label.setText(userProfile.getFirstName() + " " + userProfile.getLastName());
+        this.email_label.setText(userProfile.getEmail());
     }
 
+    public void load_seats_screen(Event event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/seats.fxml"));
+            Parent seatsRoot = loader.load();
+
+            SeatsController seatsController = loader.getController();
+            seatsController.setMainWindowController(this);
+            seatsController.setEventDetails(event);
+
+            // Set the right content of border_pane to signInRoot
+            border_pane.setRight(seatsRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void load_edit_profile_screen() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/edit_profile.fxml"));
+            Parent editProfileRoot = loader.load();
+
+            EditProfileController editProfileController = loader.getController();
+            editProfileController.setMainWindowController(this);
+            editProfileController.setWelcomeLabel(userProfile);
+
+            // Set the right content of border_pane to signInRoot
+            border_pane.setRight(editProfileRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getWelcomeText(){
+        String firstName = this.userProfile.getFirstName();
+        LocalTime currentTime = LocalTime.now();
+
+        if (currentTime.isBefore(LocalTime.NOON)) {
+            return "Good morning, " + firstName + ".";
+        } else if (currentTime.isBefore(LocalTime.of(18, 0))) {
+            return "Good afternoon, " + firstName + ".";
+        } else {
+            return "Good evening, " + firstName + ".";
+        }
+    }
+
+    public void edit_profile_clicked(MouseEvent mouseEvent) {
+        this.load_edit_profile_screen();
+    }
 }
