@@ -16,16 +16,12 @@ public class SignInController {
     private MainSign mainScreenController;
     @FXML
     private TextField email_field;
-
     @FXML
     private Label forgot_password_label;
-
     @FXML
     private PasswordField password_field;
-
     @FXML
     private Button signin_btn;
-
     @FXML
     private Button signup_btn;
 
@@ -36,7 +32,8 @@ public class SignInController {
     @FXML
     void forgotPasswordClicked(MouseEvent event) {
         // TODO: Need to firstly go to the OTP and then to create new password.
-        RequestsUtility.sendOTP(this.email_field.getText());
+        //RequestsUtility.sendOTP(this.email_field.getText());
+        mainScreenController.setCurrentEmail(this.email_field.getText());
         mainScreenController.loadOTP();
     }
 

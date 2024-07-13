@@ -9,10 +9,15 @@ public class MainSign {
     @FXML
     private BorderPane border_pane;
     private String currentJWT;
+    private String currentEmail;
 
     @FXML
     public void initialize() {
         loadSignInScreen();
+    }
+
+    public void setCurrentEmail(String currentEmail){
+        this.currentEmail = currentEmail;
     }
 
     public void loadSignInScreen() {
@@ -55,6 +60,24 @@ public class MainSign {
             // Access the controller to pass border_pane
             OtpController otpScreenController = loader.getController();
             otpScreenController.setMainScreenController(this);
+            otpScreenController.setEmailAddressAndSend(this.currentEmail);
+
+            // Set the right content of border_pane to signInRoot
+            border_pane.setRight(otpScreenRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadRestorePassword(String currentJWT){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/restore_password.fxml"));
+            Parent otpScreenRoot = loader.load();
+
+            // Access the controller to pass border_pane
+            RestorePassword restoreScreenController = loader.getController();
+            restoreScreenController.setMainScreenController(this);
+            restoreScreenController.setCurrentJWT(currentJWT);
 
             // Set the right content of border_pane to signInRoot
             border_pane.setRight(otpScreenRoot);
