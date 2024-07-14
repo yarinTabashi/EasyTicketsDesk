@@ -10,12 +10,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Utility class for making HTTP requests to the various server endpoints.
+ */
 public class RequestsUtility {
     private static final String MAIN_URL = "http://localhost:8080";
-
-    private RequestsUtility() {
-        throw new IllegalStateException("Utility class");
-    }
 
     private static HttpURLConnection createConnection(String endpoint) throws IOException {
         URL url = new URL(MAIN_URL + endpoint);
@@ -530,60 +529,4 @@ public class RequestsUtility {
 
         return reservations;
     }
-//    public static List<Reservation> getAllReservations(String token) {
-//        HttpURLConnection connection = null;
-//        List<Reservation> reservations = new ArrayList<>();
-//
-//        try {
-//            // Create connection
-//            URL url = new URL(MAIN_URL + "/reservations");
-//            connection = (HttpURLConnection) url.openConnection();
-//
-//            // Set request method and headers
-//            connection.setRequestMethod("GET");
-//            connection.setRequestProperty("Authorization", "Bearer " + token);
-//            connection.setRequestProperty("Content-Type", "application/json");
-//
-//            // Get Response
-//            int responseCode = connection.getResponseCode();
-//            if (responseCode == HttpURLConnection.HTTP_OK) {
-//                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-//                    StringBuilder response = new StringBuilder();
-//                    String line;
-//                    while ((line = in.readLine()) != null) {
-//                        response.append(line);
-//                    }
-//                    JSONArray jsonArray = new JSONArray(response.toString());
-//
-//                    // Parse JSON Array into List<Event>
-//                    for (int i = 0; i < jsonArray.length(); i++) {
-//                        try
-//                        {
-//                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                            Reservation reservation = new Reservation(jsonObject);
-//                            reservations.add(reservation);
-//                        }
-//                        catch (Exception e){
-//                            System.err.println("Error occurred while trying parsing the json object to Reservation.");
-//                        }
-//                    }
-//                } catch (IOException e) {
-//                    throw new RuntimeException("Error reading response", e);
-//                } catch (JSONException e) {
-//                    throw new RuntimeException("Error parsing JSON response", e);
-//                }
-//            } else {
-//                System.err.println("HTTP error code: " + responseCode);
-//            }
-//        } catch (IOException e) {
-//            throw new RuntimeException("Error making HTTP request", e);
-//        } finally {
-//            if (connection != null) {
-//                connection.disconnect();
-//            }
-//        }
-//
-//        return reservations;
-//    }
-
 }

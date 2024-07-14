@@ -18,14 +18,23 @@ public class PreferencesController {
     private GridPane categories_container;
     @FXML
     private Label welcome_label;
-    @FXML
-    public void initialize(){
-    }
+
 
     public void setMainScreenController(MainWindowController mainWindowController) {
         this.mainWindowController = mainWindowController;
     }
 
+    public void initializeComponents() {
+        this.welcome_label.setText(mainWindowController.getWelcomeText());
+        Map<String, Boolean> preferencesMap = RequestsUtility.getUserPreferences(mainWindowController.getJwt());
+        createCategoryComponents(preferencesMap);
+    }
+
+    /**
+     * Creates and positions CategoryComponent instances based on preferencesMap data.
+     * Each CategoryComponent is placed dynamically in a grid layout within categories_container.
+     * @param preferencesMap A map containing category names as keys and boolean values indicating preferences.
+     */
     private void createCategoryComponents(Map<String, Boolean> preferencesMap) {
         int col = 0;
         int row = 0;
@@ -37,17 +46,17 @@ public class PreferencesController {
             CategoryComponent categoryComponent = new CategoryComponent(categoryName, categoryValue);
 
             // Set positions dynamically based on row and col indices
-            categoryComponent.setLayoutX(50 + col * 150); // Adjust X position as needed
-            categoryComponent.setLayoutY(50 + row * 150); // Adjust Y position as needed
+            categoryComponent.setLayoutX(50 + col * 150);
+            categoryComponent.setLayoutY(50 + row * 150);
 
-            // Add categoryComponent to categories_container
+            // Add the component to the categories container
             categories_container.add(categoryComponent, col, row);
 
             // Update col and row indices for next position
             col++;
-            if (col >= 3) { // Assuming 3 columns per row
+            if (col >= 3) {
                 col = 0; // Reset column index
-                row++; // Move to the next row
+                row++;
             }
         }
     }
@@ -68,11 +77,5 @@ public class PreferencesController {
         // TODO: Save this preferencesMap to the db by UPDATE request
         RequestsUtility.setUserPreferencesMapping(mainWindowController.getJwt(), preferencesMap);
         System.out.println("Preferences Saved: " + preferencesMap);
-    }
-
-    public void initializeComponents() {
-        this.welcome_label.setText(mainWindowController.getWelcomeText());
-        Map<String, Boolean> preferencesMap = RequestsUtility.getUserPreferences(mainWindowController.getJwt());
-        createCategoryComponents(preferencesMap);
     }
 }

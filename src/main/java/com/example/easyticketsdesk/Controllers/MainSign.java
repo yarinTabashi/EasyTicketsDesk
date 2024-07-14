@@ -8,8 +8,7 @@ import java.io.IOException;
 public class MainSign {
     @FXML
     private BorderPane border_pane;
-    private String currentJWT;
-    private String currentEmail;
+    private String currentJWT, currentEmail;
 
     @FXML
     public void initialize() {
@@ -41,9 +40,8 @@ public class MainSign {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/signup.fxml"));
             Parent signUpRoot = loader.load();
 
-            // Access the controller to pass border_pane
             SignupController signUpController = loader.getController();
-            signUpController.setMainScreenController(this);
+            signUpController.initialize(this);
 
             // Set the right content of border_pane to signInRoot
             border_pane.setRight(signUpRoot);

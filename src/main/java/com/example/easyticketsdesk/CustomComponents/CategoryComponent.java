@@ -1,12 +1,21 @@
 package com.example.easyticketsdesk.CustomComponents;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
-import java.util.Map;
 
+/**
+ * A custom button component representing a category selection.
+ * Allows toggling between selected and unselected states visually.
+ */
 public class CategoryComponent extends Button {
     private String categoryName;
     private Boolean isSelected;
 
+    /**
+     * Constructs a CategoryComponent with the specified category name and initial selection state.
+     *
+     * @param category_name The name of the category
+     * @param isSelected    true if the category is initially selected, false otherwise
+     */
     public CategoryComponent(String category_name, Boolean isSelected) {
         super();
         this.categoryName = category_name;
@@ -22,15 +31,16 @@ public class CategoryComponent extends Button {
             setUnselected();
         }
 
-        // Handle click event
-        setOnAction(e -> handleClick());
+        setOnAction(e -> handleClick()); // Create a click event
     }
 
+    // Sets the component's visual style to indicate it is selected.
     public void setSelected(){
         this.isSelected = true;
         setStyle("-fx-background-color: #544c8c; -fx-background-radius: 50;"); // Selected
     }
 
+    // Sets the component's visual style to indicate it is unselected.
     public void setUnselected(){
         this.isSelected = false;
         setStyle("-fx-background-color: #9a93c9; -fx-background-radius: 50;"); // Unselected

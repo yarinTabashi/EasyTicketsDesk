@@ -4,6 +4,7 @@ import com.example.easyticketsdesk.Entities.Event;
 import com.example.easyticketsdesk.RequestsUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import java.util.List;
 
@@ -14,11 +15,9 @@ public class DashboardController {
     private HBox cardsContainer;
     @FXML
     private Label welcome_label;
-
     @FXML
-    public void initialize() {
-        //set_upcoming_events();
-    }
+    private ImageView imageView;
+
 
     public void setMainScreenController(MainWindowController mainWindowController) {
         this.mainWindowController = mainWindowController;
@@ -29,10 +28,8 @@ public class DashboardController {
 
         EventComponent newComponent = null;
         for (Event event : events) {
-            newComponent = new EventComponent();
-            newComponent.setMainWindowController(mainWindowController, event);
+            newComponent = new EventComponent(mainWindowController, event);
             cardsContainer.getChildren().add(newComponent);
-            newComponent.setEventDetails(event.getEventName(), event.getVenue(), event.getDateFormat());
         }
 
         this.welcome_label.setText(mainWindowController.getWelcomeText());

@@ -50,7 +50,7 @@
                 <TextField fx:id="last_name_field" styleClass="custom-text-field" layoutX="173.0" layoutY="134.0" prefHeight="35.0" prefWidth="118.0" promptText="Last name" />
                 <TextField fx:id="email_field" styleClass="custom-text-field" layoutX="46.0" layoutY="178.0" prefHeight="35.0" prefWidth="245.0" promptText="Email" />
                 <PasswordField fx:id="password_field" styleClass="custom-text-field" layoutX="46.0" layoutY="238.0" prefHeight="35.0" prefWidth="245.0" promptText="Password" />
-                <PasswordField fx:id="register_repassword_field" styleClass="custom-text-field" layoutX="46.0" layoutY="285.0" prefHeight="35.0" prefWidth="245.0" promptText="re-password" />
+                <PasswordField fx:id="re_password_field" styleClass="custom-text-field" layoutX="46.0" layoutY="285.0" prefHeight="35.0" prefWidth="245.0" promptText="re-password" />
                 <Label fx:id="password_warning_label" textFill="red" layoutX="46.0" layoutY="330.0" />
 
                 <!-- Sign Up Button with Hover Effect -->

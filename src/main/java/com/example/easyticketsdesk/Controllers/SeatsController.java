@@ -14,27 +14,24 @@ import java.util.List;
 
 public class SeatsController {
     @FXML
-    private MainWindowController mainWindowController;
-    @FXML
-    private Label event_name_label;
-    @FXML
-    private Label location_and_venue_label;
+    private Label event_name_label, location_and_venue_label, selected_desc_label;
     @FXML
     private Button reserve_btn;
     @FXML
-    private Label selected_desc_label;
+    private MainWindowController mainWindowController;
+
+    // Additional information
     @FXML
-    private GridPane seats_gridpane;
-    private List<Seat> seatList;
-    private Event event;
-    private Seat chosenSeat;
+    private GridPane seats_gridpane; // Container for displaying seat components
+    private List<Seat> seatList; // List to hold seat objects
+    private Event event; // Current event object
+    private Seat chosenSeat; // Current seat object
 
     @FXML
     public void initialize(MainWindowController mainWindowController, Event event) {
         this.mainWindowController = mainWindowController;
         this.event = event;
 
-        //set_seats();
         this.seatList = RequestsUtility.getSeatsMapping(mainWindowController.getJwt(), this.event.getEventId().intValue());
         updateSeatGrid();
         setEventDetails();
@@ -42,9 +39,9 @@ public class SeatsController {
 
     public void setMainWindowController(MainWindowController mainWindowController){
         this.mainWindowController = mainWindowController;
-        //updateSeatGrid();
     }
 
+    // Initialize the seat grid with SeatComponent instances based on seatList data.
     private void updateSeatGrid() {
         initializeGridPane();
 
@@ -54,7 +51,6 @@ public class SeatsController {
             seatComponent = createSeatComponent(seat);
             seatComponent.setUserData(seat); // Store seat data in the component for later use
 
-            // Add the button to the grid-pane at the appropriate position
             seats_gridpane.add(seatComponent, seat.getSeatNumber(), seat.getRowNumber());
         }
     }
@@ -74,6 +70,7 @@ public class SeatsController {
         }
     }
 
+    // Creates a SeatComponent instance for the given Seat.
     private SeatComponent createSeatComponent(Seat seat) {
         SeatComponent seatComponent = new SeatComponent(seat.getSeatStatus());
         seatComponent.setSeat(seat);
@@ -94,11 +91,13 @@ public class SeatsController {
         }
     }
 
+    // Sets the event details on the window.
     public void setEventDetails() {
         this.event_name_label.setText(this.event.getEventName());
         this.location_and_venue_label.setText(this.event.getDateFormat());
     }
 
+    // Sets the chosen seat and displays its details.
     public void setChosenSeat(Seat chosenSeat){
         this.chosenSeat = chosenSeat;
         System.out.println("Seat id: " + chosenSeat.getId() + "(" + chosenSeat.getRowNumber() + "," + chosenSeat.getSeatNumber() + ")");

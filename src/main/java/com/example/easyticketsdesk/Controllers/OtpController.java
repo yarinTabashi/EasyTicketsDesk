@@ -16,45 +16,39 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class OtpController implements Initializable {
-    private int timerSeconds = 60;
+    // OTP interval issues
+    private final int INTERVAL_TIME_SECONDS = 60; // Interval time in seconds
+    private int timerSeconds = INTERVAL_TIME_SECONDS;
     private Timeline timer;
+    private boolean isIntervalOver = false;
+    @FXML
+    private Label timer_label;
+
+    // Additional
+    @FXML
+    private TextField textField1, textField2, textField3, textField4, textField5, textField6;  // Fields for entering each digit of the OTP
     public Button submit_btn;
     @FXML
     private Label warning_label;
-    @FXML
-    private Label timer_label;
+
     @FXML
     private MainSign mainScreenController;
-    @FXML
-    private TextField textField1;
-
-    @FXML
-    private TextField textField2;
-
-    @FXML
-    private TextField textField3;
-
-    @FXML
-    private TextField textField4;
-    @FXML
-    private TextField textField5;
-    @FXML
-    private TextField textField6;
     private String emailAddress; // The email of the user whose trying to sign in.
-    private boolean isIntervalOver = false;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Initialize method
         startTimer();
     }
 
+    // Starts a countdown timer for OTP resend interval.
     private void startTimer() {
         this.isIntervalOver = false;
+
         timer = new Timeline(new KeyFrame(
                 javafx.util.Duration.seconds(1),
                 event -> {
                     timerSeconds--;
-                    timer_label.setText("Time remaining:\n " + timerSeconds + " seconds");
+                    timer_label.setText("" + timerSeconds + " seconds"); // Update timer label
 
                     if (timerSeconds <= 0) {
                         timer.stop();
@@ -76,8 +70,8 @@ public class OtpController implements Initializable {
         this.mainScreenController = mainScreenController;
     }
 
+    // Set event handlers for all text fields
     private void setupTextFields() {
-        // Set event handlers for all text fields
         textField1.setOnKeyTyped(this::handleDigitInput);
         textField2.setOnKeyTyped(this::handleDigitInput);
         textField3.setOnKeyTyped(this::handleDigitInput);
@@ -86,6 +80,7 @@ public class OtpController implements Initializable {
         textField6.setOnKeyTyped(this::handleDigitInput);
     }
 
+    // Handles input of a single digit (0-9) in each text field and moves focus to the next field.
     @FXML
     private void handleDigitInput(KeyEvent event) {
         TextField source = (TextField) event.getSource();
@@ -96,7 +91,7 @@ public class OtpController implements Initializable {
             return;
         }
 
-        // Move focus to the next text field
+        // Moving the focus
         switch (source.getId()) {
             case "textField1":
                 textField2.requestFocus();
@@ -109,21 +104,23 @@ public class OtpController implements Initializable {
                 break;
             case "textField4":
                 textField5.requestFocus();
-                // Focus stays on textField4, or do something else like submit
                 break;
             case "textField5":
                 textField6.requestFocus();
-                // Focus stays on textField4, or do something else like submit
                 break;
             default:
                 break;
         }
     }
 
+
+    // Handles the submission of the OTP and verifies it.
     public void submit_clicked(MouseEvent mouseEvent) {
         String otpString = textField1.getText() + textField2.getText() + textField3.getText() + textField4.getText() + textField5.getText() + textField6.getText();
         try {
             int otp = Integer.parseInt(otpString);
+
+            // Verify OTP using RequestsUtility
             JSONObject jsonObject = RequestsUtility.verifyOTP("yafa@gmail.com", otp);
             if (jsonObject == null){
                 this.warning_label.setText("Invalid OTP. Try again");
@@ -133,12 +130,14 @@ public class OtpController implements Initializable {
                 this.mainScreenController.loadRestorePassword(jsonObject.getString("token"));
             }
         } catch (NumberFormatException e) {
+            // Display error message for invalid OTP format
             this.warning_label.setText("Invalid OTP format. Enter digits only.");
         } catch (JSONException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e); // Throw a runtime exception for JSON parsing error
         }
     }
 
+    // Checks if the resend interval is over and sends OTP using RequestsUtility.
     public void resend_clicked(MouseEvent mouseEvent) {
         if  (isIntervalOver){
             RequestsUtility.sendOTP(this.emailAddress);

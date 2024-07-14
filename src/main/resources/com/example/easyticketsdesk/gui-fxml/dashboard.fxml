@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.scene.image.ImageView?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.easyticketsdesk.Controllers.DashboardController">
     <stylesheets>
         <URL value="@../styles.css" />
@@ -48,7 +49,11 @@
                                       <Font name="Bell MT Italic" size="20.0" />
                                   </font>
                               </Label>
-                              <Pane layoutX="24.0" prefHeight="104.0" prefWidth="94.0" style="-fx-background-color: #906dbf; -fx-background-radius: 60;" />
+                              <Pane fx:id="eyalgolad_pane" layoutX="24.0" prefHeight="104.0" prefWidth="94.0" style="-fx-background-color: #906dbf; -fx-background-radius: 60;">
+                                  <children>
+                                      <ImageView fx:id="imageView" fitWidth="94.0" fitHeight="104.0" />
+                                  </children>
+                              </Pane>
                           </children>
                       </Pane>
                       <Pane prefHeight="147.0" prefWidth="141.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">

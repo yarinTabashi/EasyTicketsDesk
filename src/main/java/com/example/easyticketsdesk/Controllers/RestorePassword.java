@@ -10,15 +10,19 @@ public class RestorePassword {
     private String currentJWT;
     @FXML
     private MainSign mainScreenController;
-
     @FXML
-    private PasswordField passwordField;
-    @FXML
-    private PasswordField repasswordField;
+    private PasswordField passwordField, repasswordField;
     @FXML
     private Button restore_btn;
     @FXML
     private Label warning_label;
+
+    public void setMainScreenController(MainSign mainSign) {
+        this.mainScreenController = mainScreenController;
+    }
+    public void setCurrentJWT(String currentJWT){
+        this.currentJWT = currentJWT;
+    }
 
     public void restoreBtnClicked(MouseEvent mouseEvent) {
         if (checkMatching()){
@@ -34,13 +38,5 @@ public class RestorePassword {
             this.warning_label.setText("Passwords don't match");
             return false;
         }
-    }
-
-    public void setMainScreenController(MainSign mainSign) {
-        this.mainScreenController = mainScreenController;
-    }
-
-    public void setCurrentJWT(String currentJWT){
-        this.currentJWT = currentJWT;
     }
 }

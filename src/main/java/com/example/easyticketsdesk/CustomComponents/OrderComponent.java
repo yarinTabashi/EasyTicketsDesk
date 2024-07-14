@@ -17,19 +17,14 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+/**
+ * Custom component representing an order details view with a dynamically generated QR code.
+ */
 public class OrderComponent extends AnchorPane {
     @FXML
     private MainWindowController mainWindowController;
     @FXML
-    private Label event_name_label;
-    @FXML
-    private Label event_date_label;
-    @FXML
-    private Label order_date_label;
-    @FXML
-    private Label price_label;
-    @FXML
-    private Label venue_label;
+    private Label event_name_label, event_date_label, order_date_label, price_label, venue_label; // Order details
     @FXML
     private ImageView qrCodeImageView;
     private Reservation reservation;
@@ -65,7 +60,6 @@ public class OrderComponent extends AnchorPane {
         try {
             Image qrCodeImage = generateQRCodeImage("1234");
             qrCodeImageView.setImage(qrCodeImage);
-            //qrCodeImageView2.setImage(qrCodeImage);
         } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
@@ -82,14 +76,5 @@ public class OrderComponent extends AnchorPane {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 
         return new Image(inputStream);
-    }
-
-    @FXML
-    public void setDetails(){
-        this.event_name_label.setText("");
-        this.order_date_label.setText("");
-        this.price_label.setText("");
-        this.venue_label.setText("");
-        this.event_date_label.setText("");
     }
 }

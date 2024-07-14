@@ -10,7 +10,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 
 public class SignInController {
@@ -18,13 +17,13 @@ public class SignInController {
     @FXML
     private TextField email_field;
     @FXML
+    private PasswordField password_field;
+
+    // Navigation controllers (e.g., sign-in, sign-up, forgot-password)
+    @FXML
     private Label forgot_password_label;
     @FXML
-    private PasswordField password_field;
-    @FXML
-    private Button signin_btn;
-    @FXML
-    private Button signup_btn;
+    private Button signin_btn, signup_btn;
 
     public void setMainScreenController(MainSign mainScreenController) {
         this.mainScreenController = mainScreenController;
@@ -68,6 +67,7 @@ public class SignInController {
         mainScreenController.loadSignUpScreen();
     }
 
+    // Validates the email and password fields and displays alerts for invalid input.
     private boolean validateFields() {
         String email = email_field.getText();
         String password = password_field.getText();
@@ -85,12 +85,13 @@ public class SignInController {
         return true;
     }
 
+    //Checks if the given email string matches a basic email format using regex.
     private boolean isValidEmail(String email) {
-        // Simple email validation using regex
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         return email.matches(emailRegex);
     }
 
+    // Shows a warning alert dialog with the given title and message.
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(title);
@@ -99,6 +100,7 @@ public class SignInController {
         alert.showAndWait();
     }
 
+    // Switches the scene to the main window after successful sign-in.
     private void switchToMainWindow(String currentJwt) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/main_window.fxml"));

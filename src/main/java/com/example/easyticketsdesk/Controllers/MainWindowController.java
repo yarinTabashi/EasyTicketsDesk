@@ -13,28 +13,20 @@ import java.time.LocalTime;
 
 public class MainWindowController {
     @FXML
-    private BorderPane border_pane;
+    private BorderPane border_pane; // Container for dynamically replacing the right pane
     @FXML
-    private Label name_label;
+    private Label name_label, email_label; // Profile data
     @FXML
-    private Label email_label;
-    private UserProfile userProfile;
-    // Menu buttons
-    @FXML
-    private Label explore_btn;
-    @FXML
-    private Label preferences_btn;
-    @FXML
-    private Label orders_btn;
-    @FXML
-    private Label search_btn;
+    private Label explore_btn, preferences_btn, orders_btn, search_btn; // Menu "buttons"
     @FXML
     private ImageView edit_profile_icon;
+
+    // Additional necessary information
+    private UserProfile userProfile;
 
     @FXML
     public void initialize() {
         activateAndInactivate(explore_btn);
-        //load_dashboard();
     }
 
     @FXML
@@ -164,8 +156,8 @@ public class MainWindowController {
             Parent editProfileRoot = loader.load();
 
             EditProfileController editProfileController = loader.getController();
-            editProfileController.setMainWindowController(this);
-            editProfileController.setWelcomeLabel(userProfile);
+            editProfileController.initialize(this, this.userProfile);
+            //editProfileController.setWelcomeLabel(userProfile);
 
             // Set the right content of border_pane to signInRoot
             border_pane.setRight(editProfileRoot);

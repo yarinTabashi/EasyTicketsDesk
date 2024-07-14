@@ -1,41 +1,36 @@
 package com.example.easyticketsdesk.CustomComponents;
-import com.example.easyticketsdesk.Controllers.MainSign;
 import com.example.easyticketsdesk.Controllers.MainWindowController;
 import com.example.easyticketsdesk.Entities.Event;
+import com.example.easyticketsdesk.ImageLoadingService;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.io.IOException;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView ;
 
+/**
+ * Custom component representing an event card with details and an image.
+ * Clicking on the card loads the seats screen related to the event.
+ */
 public class EventComponent extends VBox {
     @FXML
     private MainWindowController mainWindowController;
     private Event event;
     @FXML
-    private Pane image_pane;
+    private Label name_label, price_label, venue_label, date_label; // Labels for event details
     @FXML
-    private Label name_label;
+    private ImageView imageView;
 
-    @FXML
-    private Label price_label;
+    public EventComponent(MainWindowController mainWindowController, Event event) {
+        // Initialize the properties
+        this.mainWindowController = mainWindowController;
+        this.event = event;
 
-    @FXML
-    private Label venue_label;
-
-    @FXML
-    private Label date_label;
-
-    public EventComponent() {
+        // Load the fxml
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/event_component.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(EventComponent.this);
@@ -52,37 +47,38 @@ public class EventComponent extends VBox {
                 handle_event_card_clicked();
             }
         });
+
+        // Initialize the event details
+        this.setEventDetails();
     }
 
-    public void setMainWindowController(MainWindowController mainWindowController, Event event) {
-        this.mainWindowController = mainWindowController;
-        this.event = event;
+    // Sets the event details and also load the event image.
+    public void setEventDetails(){
+        this.name_label.setText(this.event.getEventName());
+        this.venue_label.setText(this.event.getVenue());
+        this.date_label.setText(this.event.getDateFormat());
+
+        this.setImage("https://media.istockphoto.com/id/1471448614/photo/crowd-of-people-dancing-at-a-music-show-in-barcelona-during-the-summer-of-2022.jpg?s=612x612&w=0&k=20&c=FpGZq6p-1Gqx1JHN-mgapyQhLlvtNGr2M-hxm7mSvt0=");
     }
 
-    public void setEventDetails(String eventName, String venue, String eventDate){
-        this.name_label.setText(eventName);
-        this.venue_label.setText(venue);
-        this.date_label.setText(eventDate);
+
+    // Loads and sets the event image from the provided URL asynchronously.
+    public void setImage(String imageUrl) {
+        ImageLoadingService service = new ImageLoadingService(imageUrl);
+
+        service.setOnSucceeded(event -> {
+            Image loadedImage = service.getValue();
+            imageView.setFitWidth(255);
+            imageView.setFitHeight(110);
+            imageView.setPreserveRatio(false);
+            imageView.setImage(loadedImage);
+        });
+
+        service.start();
     }
 
+    // Loads the seats screen related to the event.
     private void handle_event_card_clicked() {
         this.mainWindowController.load_seats_screen(event);
-    }
-
-
-    public void setEventName(String eventName) {
-        name_label.setText(eventName);
-    }
-
-    public void setPrice(String price) {
-        price_label.setText(price);
-    }
-
-    public void setVenue(String venue) {
-        venue_label.setText(venue);
-    }
-
-    public void setDate(String date) {
-        date_label.setText(date);
     }
 }

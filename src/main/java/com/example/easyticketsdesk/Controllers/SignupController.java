@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import java.io.IOException;
@@ -18,31 +17,20 @@ public class SignupController {
     @FXML
     private MainSign mainScreenController;
 
+    // Sign-up fields
     @FXML
-    private Label already_exists;
+    private TextField first_name_field, last_name_field, email_field;
+    @FXML
+    private PasswordField password_field, re_password_field;
 
     @FXML
-    private TextField email_field;
+    private Button signup_btn; // Save btn
+    @FXML
+    private Label password_warning_label; // to display warnings related to password issues
 
-    @FXML
-    private TextField first_name_field;
-
-    @FXML
-    private TextField last_name_field;
-
-    @FXML
-    private Pane left_pane;
-
-    @FXML
-    private PasswordField password_field;
-
-    @FXML
-    private PasswordField register_repassword_field;
-
-    @FXML
-    private Button signup_btn;
-    @FXML
-    private Label password_warning_label;
+    public void initialize(MainSign mainScreenController){
+        this.mainScreenController = mainScreenController;
+    }
 
     @FXML
     void already_exists_clicked(MouseEvent event) {
@@ -66,16 +54,12 @@ public class SignupController {
         }
     }
 
-    public void setMainScreenController(MainSign mainScreenController) {
-        this.mainScreenController = mainScreenController;
-    }
-
     private boolean validateFields() {
         String email = email_field.getText();
         String firstName = first_name_field.getText();
         String lastName = last_name_field.getText();
         String password = password_field.getText();
-        String repassword = register_repassword_field.getText();
+        String repassword = re_password_field.getText();
 
         if (email.isEmpty() || !isValidEmail(email)) {
             showAlert("Invalid Email", "Please enter a valid email address.");

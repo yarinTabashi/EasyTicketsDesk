@@ -13,21 +13,19 @@ public class EditProfileController {
     @FXML
     private Label welcome_label;
     @FXML
-    private TextField emailTextField;
-    @FXML
-    private TextField firstTextField;
-    @FXML
-    private TextField lastTextField;
+    private TextField emailTextField, firstTextField, lastTextField; // Fields to edit
     @FXML
     private Button save_btn;
 
-    public void setMainWindowController(MainWindowController mainWindowController) {
+    public void initialize(MainWindowController mainWindowController, UserProfile userProfile) {
         this.mainWindowController = mainWindowController;
+        this.userProfile = userProfile;
+
+        initializeDetails();
     }
 
-    public void setWelcomeLabel(UserProfile userProfile){
+    public void initializeDetails(){
         this.welcome_label.setText(mainWindowController.getWelcomeText());
-        this.userProfile = userProfile;
         this.emailTextField.setText(userProfile.getEmail());
         this.firstTextField.setText(userProfile.getFirstName());
         this.lastTextField.setText(userProfile.getLastName());
