@@ -39,26 +39,28 @@ public class SignInController {
     }
 
     @FXML
-    void signInBtnClicked(MouseEvent event) {
-        if (validateFields()) {
-            // Proceed with login logic and scene switching
-            JSONObject jsonObject = RequestsUtility.login(email_field.getText(), password_field.getText());
-            if (jsonObject == null){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Login failed");
-                alert.setContentText("Make sure the properties are ok");
-                alert.showAndWait();
-            }
-            else {
-                try {
-                    System.out.println(jsonObject.getString("email"));
-                    System.out.println(jsonObject.getString("token"));
-                    switchToMainWindow(jsonObject.getString("token"));
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
+    void signInBtnClicked(MouseEvent event) throws JSONException {
+        JSONObject jsonObject = RequestsUtility.login("yarin@gmail.com", "yarinworld");
+        switchToMainWindow(jsonObject.getString("token"));
+//        if (validateFields()) {
+//            // Proceed with login logic and scene switching
+//            JSONObject jsonObject = RequestsUtility.login(email_field.getText(), password_field.getText());
+//            if (jsonObject == null){
+//                Alert alert = new Alert(Alert.AlertType.ERROR);
+//                alert.setTitle("Login failed");
+//                alert.setContentText("Make sure the properties are ok");
+//                alert.showAndWait();
+//            }
+//            else {
+//                try {
+//                    System.out.println(jsonObject.getString("email"));
+//                    System.out.println(jsonObject.getString("token"));
+//                    switchToMainWindow(jsonObject.getString("token"));
+//                } catch (JSONException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        }
     }
 
     @FXML

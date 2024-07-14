@@ -1,11 +1,19 @@
 package com.example.easyticketsdesk.CustomComponents;
 import com.example.easyticketsdesk.Controllers.SeatsController;
+import com.example.easyticketsdesk.Entities.Seat;
 import com.example.easyticketsdesk.Entities.SeatStatus;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public class SeatComponent extends Button {
+    @FXML
+    private SeatsController seatsController;
     private SeatStatus currentStatus;
+    private Seat seat;
+
+    public void setSeatsController(SeatsController seatsController) {
+        this.seatsController = seatsController;
+    }
 
     public SeatComponent(SeatStatus seatStatus) {
         super();
@@ -47,6 +55,8 @@ public class SeatComponent extends Button {
     }
 
     private void handleClick() {
+        this.seatsController.setChosenSeat(this.seat);
+
         switch (currentStatus) {
             case AVAILABLE:
                 setYourChoiceStyle();
@@ -60,5 +70,9 @@ public class SeatComponent extends Button {
             default:
                 break;
         }
+    }
+
+    public void setSeat(Seat seat){
+        this.seat = seat;
     }
 }

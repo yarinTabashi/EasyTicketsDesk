@@ -5,7 +5,6 @@ import com.example.easyticketsdesk.RequestsUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-
 import java.util.List;
 
 public class DashboardController {

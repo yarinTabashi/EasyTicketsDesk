@@ -2,8 +2,9 @@ package com.example.easyticketsdesk;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-
 import com.example.easyticketsdesk.Entities.Event;
+import com.example.easyticketsdesk.Entities.Reservation;
+import com.example.easyticketsdesk.Entities.Seat;
 import com.example.easyticketsdesk.Entities.UserProfile;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -388,4 +389,201 @@ public class RequestsUtility {
 
         return events;
     }
+
+    public static List<Seat> getSeatsMapping(String token, int eventId) {
+        HttpURLConnection connection = null;
+        List<Seat> seats = new ArrayList<>();
+
+        try {
+            // Create connection
+            URL url = new URL(MAIN_URL + "/seats/" + eventId);
+            connection = (HttpURLConnection) url.openConnection();
+
+            // Set request method and headers
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Authorization", "Bearer " + token);
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // Get Response
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = in.readLine()) != null) {
+                        response.append(line);
+                    }
+                    JSONArray jsonArray = new JSONArray(response.toString());
+
+                    // Parse JSON Array into List<Event>
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        try
+                        {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Seat seat = new Seat(jsonObject);
+                            seats.add(seat);
+                        }
+                        catch (Exception e){
+                            System.err.println("Error occurred while trying parsing the json object to Seat.");
+                        }
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException("Error reading response", e);
+                } catch (JSONException e) {
+                    throw new RuntimeException("Error parsing JSON response", e);
+                }
+            } else {
+                System.err.println("HTTP error code: " + responseCode);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error making HTTP request", e);
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+
+        return seats;
+    }
+
+    public static boolean reserve(String token, int seatId) {
+        HttpURLConnection connection = null;
+        try {
+            // Create connection to the endpoint
+            connection = createConnection("/reservations/" + seatId);
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Authorization", "Bearer " + token);
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+
+            connection.getOutputStream().close();
+
+            // Check response code
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_CREATED) {
+                return true; // Reservation created successfully
+            } else {
+                System.out.println("Failed to reserve seat. HTTP response code: " + responseCode);
+                return false;
+            }
+        } catch (ConnectException e) {
+            System.err.println("Connection refused: Please check server availability.");
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
+    public static List<Reservation> getAllReservations(String token) {
+        HttpURLConnection connection = null;
+        List<Reservation> reservations = new ArrayList<>();
+
+        try {
+            // Create connection
+            URL url = new URL(MAIN_URL + "/reservations");
+            connection = (HttpURLConnection) url.openConnection();
+
+            // Set request method and headers
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Authorization", "Bearer " + token);
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // Get Response
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = in.readLine()) != null) {
+                        response.append(line);
+                    }
+                    JSONArray jsonArray = new JSONArray(response.toString());
+
+                    // Parse JSON Array into List<Reservation>
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        try {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Reservation reservation = new Reservation(jsonObject);
+                            reservations.add(reservation);
+                        } catch (Exception e) {
+                            System.err.println("Error occurred while trying to parse the json object to Reservation.");
+                        }
+                    }
+                } catch (IOException | JSONException e) {
+                    throw new RuntimeException("Error processing response", e);
+                }
+            } else {
+                System.err.println("HTTP error code: " + responseCode);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error making HTTP request", e);
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+
+        return reservations;
+    }
+//    public static List<Reservation> getAllReservations(String token) {
+//        HttpURLConnection connection = null;
+//        List<Reservation> reservations = new ArrayList<>();
+//
+//        try {
+//            // Create connection
+//            URL url = new URL(MAIN_URL + "/reservations");
+//            connection = (HttpURLConnection) url.openConnection();
+//
+//            // Set request method and headers
+//            connection.setRequestMethod("GET");
+//            connection.setRequestProperty("Authorization", "Bearer " + token);
+//            connection.setRequestProperty("Content-Type", "application/json");
+//
+//            // Get Response
+//            int responseCode = connection.getResponseCode();
+//            if (responseCode == HttpURLConnection.HTTP_OK) {
+//                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+//                    StringBuilder response = new StringBuilder();
+//                    String line;
+//                    while ((line = in.readLine()) != null) {
+//                        response.append(line);
+//                    }
+//                    JSONArray jsonArray = new JSONArray(response.toString());
+//
+//                    // Parse JSON Array into List<Event>
+//                    for (int i = 0; i < jsonArray.length(); i++) {
+//                        try
+//                        {
+//                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                            Reservation reservation = new Reservation(jsonObject);
+//                            reservations.add(reservation);
+//                        }
+//                        catch (Exception e){
+//                            System.err.println("Error occurred while trying parsing the json object to Reservation.");
+//                        }
+//                    }
+//                } catch (IOException e) {
+//                    throw new RuntimeException("Error reading response", e);
+//                } catch (JSONException e) {
+//                    throw new RuntimeException("Error parsing JSON response", e);
+//                }
+//            } else {
+//                System.err.println("HTTP error code: " + responseCode);
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException("Error making HTTP request", e);
+//        } finally {
+//            if (connection != null) {
+//                connection.disconnect();
+//            }
+//        }
+//
+//        return reservations;
+//    }
+
 }

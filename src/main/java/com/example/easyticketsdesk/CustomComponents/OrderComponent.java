@@ -1,4 +1,6 @@
 package com.example.easyticketsdesk.CustomComponents;
+import com.example.easyticketsdesk.Controllers.MainWindowController;
+import com.example.easyticketsdesk.Entities.Reservation;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -17,7 +19,11 @@ import java.io.IOException;
 
 public class OrderComponent extends AnchorPane {
     @FXML
+    private MainWindowController mainWindowController;
+    @FXML
     private Label event_name_label;
+    @FXML
+    private Label event_date_label;
     @FXML
     private Label order_date_label;
     @FXML
@@ -25,11 +31,22 @@ public class OrderComponent extends AnchorPane {
     @FXML
     private Label venue_label;
     @FXML
-    private Label date_label;
-    @FXML
     private ImageView qrCodeImageView;
+    private Reservation reservation;
     private final int QR_WIDTH = 300;
     private final int QR_HEIGHT = 300;
+
+    public void setMainWindowController(MainWindowController mainWindowController, Reservation reservation){
+        this.mainWindowController = mainWindowController;
+        this.reservation = reservation;
+    }
+
+    public void setReservationDetails(){
+        this.event_name_label.setText(this.reservation.getEvent().getEventName());
+        this.event_date_label.setText(this.reservation.getEvent().getDateFormat());
+        this.venue_label.setText(this.reservation.getEvent().getVenue());
+        this.order_date_label.setText(this.reservation.getReservationDateFormat());
+    }
 
     public OrderComponent() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/order_component.fxml"));
@@ -73,6 +90,6 @@ public class OrderComponent extends AnchorPane {
         this.order_date_label.setText("");
         this.price_label.setText("");
         this.venue_label.setText("");
-        this.date_label.setText("");
+        this.event_date_label.setText("");
     }
 }

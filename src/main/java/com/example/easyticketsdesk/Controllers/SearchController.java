@@ -24,6 +24,5 @@ public class SearchController {
     }
 
     public void searchClicked(MouseEvent mouseEvent) {
-
     }
 }

@@ -105,10 +105,13 @@ public class MainWindowController {
     public void load_orders(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/orders.fxml"));
-            Parent signInRoot = loader.load();
+            Parent ordersRoot = loader.load();
+
+            MyOrdersController ordersController = loader.getController();
+            ordersController.initialize(this);
 
             // Set the right content of border_pane to signInRoot
-            border_pane.setRight(signInRoot);
+            border_pane.setRight(ordersRoot);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -146,8 +149,7 @@ public class MainWindowController {
             Parent seatsRoot = loader.load();
 
             SeatsController seatsController = loader.getController();
-            seatsController.setMainWindowController(this);
-            seatsController.setEventDetails(event);
+            seatsController.initialize(this, event);
 
             // Set the right content of border_pane to signInRoot
             border_pane.setRight(seatsRoot);
@@ -177,11 +179,11 @@ public class MainWindowController {
         LocalTime currentTime = LocalTime.now();
 
         if (currentTime.isBefore(LocalTime.NOON)) {
-            return "Good morning, " + firstName + ".";
+            return "Good morning, " + firstName + "!";
         } else if (currentTime.isBefore(LocalTime.of(18, 0))) {
-            return "Good afternoon, " + firstName + ".";
+            return "Good afternoon, " + firstName + "!";
         } else {
-            return "Good evening, " + firstName + ".";
+            return "Good evening, " + firstName + "!";
         }
     }
 
