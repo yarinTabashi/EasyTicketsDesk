@@ -58,10 +58,12 @@ public class MainSign {
             // Access the controller to pass border_pane
             OtpController otpScreenController = loader.getController();
             otpScreenController.setMainScreenController(this);
-            otpScreenController.setEmailAddressAndSend(this.currentEmail);
+            boolean isSent = otpScreenController.setEmailAddressAndSend(this.currentEmail);
 
             // Set the right content of border_pane to signInRoot
-            border_pane.setRight(otpScreenRoot);
+            if (isSent){
+                border_pane.setRight(otpScreenRoot);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package com.example.easyticketsdesk.Controllers;
 import com.example.easyticketsdesk.Entities.UserProfile;
+import com.example.easyticketsdesk.RequestsUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -32,7 +33,12 @@ public class EditProfileController {
     }
 
     public void save_clicked(MouseEvent mouseEvent) {
-        // TODO: Save the details
-        System.out.println("Details saved");
+        try
+        {
+            RequestsUtility.updateUserDetails(this.mainWindowController.getJwt(), firstTextField.getText(), lastTextField.getText(), emailTextField.getText());
+        }
+        catch (Exception e){
+            System.out.println("Error occurred while trying to save.");
+        }
     }
 }

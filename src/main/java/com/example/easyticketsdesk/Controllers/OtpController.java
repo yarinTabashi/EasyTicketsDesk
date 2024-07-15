@@ -2,6 +2,7 @@ package com.example.easyticketsdesk.Controllers;
 import com.example.easyticketsdesk.RequestsUtility;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -61,9 +62,26 @@ public class OtpController implements Initializable {
         timer.play();
     }
 
-    public void setEmailAddressAndSend(String emailAddress){
+    public boolean setEmailAddressAndSend(String emailAddress){
         this.emailAddress = emailAddress;
-        RequestsUtility.sendOTP(this.emailAddress);
+        boolean otpSent = RequestsUtility.sendOTP(this.emailAddress);
+
+        if (!otpSent) {
+            showAlert("Error", "Error Sending OTP",
+                    "An error occurred while trying to send OTP to " + this.emailAddress);
+            return false;
+        }
+        return true;
+    }
+
+    public void showAlert(String title, String header, String content){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+
+        // Showing the alert
+        alert.showAndWait(); // This will block execution until the user closes the alert
     }
 
     public void setMainScreenController(MainSign mainScreenController) {

@@ -573,4 +573,41 @@ public class RequestsUtility {
         }
         return null;
     }
+
+    public static boolean updateUserDetails(String token, String firstName, String lastName, String email) {
+        HttpURLConnection connection = null;
+
+        try {
+            // Create connection
+            URL url = new URL(MAIN_URL + "/profile/update");
+            connection = (HttpURLConnection) url.openConnection();
+
+            // Set request method and headers
+            connection.setRequestMethod("PUT");
+            connection.setRequestProperty("Authorization", "Bearer " + token);
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true); // Enable output for POST request
+
+            // Construct JSON payload
+            String jsonInputString = "{\"firstName\":\"" + firstName + "\","
+                    + "\"lastName\":\"" + lastName + "\","
+                    + "\"email\":\"" + email + "\"}";
+
+            // Write JSON payload to output stream
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            // Get Response
+            int responseCode = connection.getResponseCode();
+            return responseCode == HttpURLConnection.HTTP_NO_CONTENT; // Assuming HTTP 204 is returned on success
+        } catch (IOException e) {
+            throw new RuntimeException("Error making HTTP request", e);
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
 }
