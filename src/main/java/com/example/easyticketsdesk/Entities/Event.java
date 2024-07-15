@@ -11,18 +11,20 @@ public class Event {
     private String description;
     private LocalDateTime date;
     private Category category;
+    private String url;
 
     public Event(){
 
     }
 
-    public Event(Long eventId, String eventName, String description, String venue, LocalDateTime date, Category category) {
+    public Event(Long eventId, String eventName, String description, String venue, LocalDateTime date, Category category, String url) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.venue = venue;
         this.description = description;
         this.date = date;
         this.category = category;
+        this.url = url;
     }
 
     public Event(JSONObject jsonObject) throws JSONException {
@@ -30,6 +32,7 @@ public class Event {
         this.eventName = jsonObject.getString("name");
         this.venue = jsonObject.getString("venue");
         this.description = jsonObject.getString("description");
+        this.url = jsonObject.getString("url");
 
         // Parse date string using DateTimeFormatter
         String dateStr = jsonObject.getString("date");
@@ -92,5 +95,13 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

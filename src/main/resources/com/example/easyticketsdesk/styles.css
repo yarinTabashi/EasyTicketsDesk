@@ -58,18 +58,12 @@
     -fx-background-color: #eeeeee; /* Light gray background on hover */
 }
 
-
 .event-card {
     padding: 10px;
     margin: 10px;
     background-color: #E0BBFF;
     border-radius: 10px;
     text-align: center;
-}
-
-.artist-label {
-    font-size: 20px;
-    font-weight: bold;
 }
 
 .sold-out {
@@ -84,10 +78,6 @@
 .sold-out:hover {
     background-color: #FF6347; /* Keep the same color on hover */
 }
-
-
-
-
 
 /* Apply styles to the fx:root VBox */
 .fx-root {
@@ -114,18 +104,19 @@
 }
 
 .myborder {
-    -fx-background-color: #9b59b6; /* Purple background */
     -fx-background-radius: 20;
     -fx-border-width: 2px; /* Border width */
     -fx-border-radius: 20;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 20, 0, 0, 1), /* Stronger drop shadow */
                 inner-shadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 1), /* Inner shadow */
-                glow(color-stop(0%, derive(-fx-background-color, 30%))),
+                glow(color-stop(0%, derive(-fx-background-color, 50%))),
                 reflection;
 
     -fx-padding: 10px; /* Padding for inner shadow effect */
+    -fx-transition: all 0.9s; /* Smooth transition for all properties */
 }
 
 .myborder:hover {
-    -fx-background-color: #a08bc7; /* Darker purple on hover */
+    -fx-scale-x: 1.1; /* Scale horizontally */
+    -fx-scale-y: 1.1; /* Scale vertically */
 }

@@ -10,15 +10,15 @@
       <URL value="@../styles.css" />
    </stylesheets>
    <children>
-      <VBox alignment="CENTER" layoutX="200.0" layoutY="74.0" prefHeight="104.0" prefWidth="451.0" style="-fx-background-color: #f5f6ff; -fx-background-radius: 50;">
+      <VBox alignment="CENTER" layoutX="200.0" layoutY="74.0" prefHeight="104.0" prefWidth="485.0" style="-fx-background-color: #f5f6ff; -fx-background-radius: 50;">
          <children>
             <Label alignment="TOP_LEFT" prefHeight="46.0" prefWidth="167.0" text="Time is ticking...">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <ProgressBar prefHeight="35.0" prefWidth="401.0" progress="0.29" />
-            <Label alignment="TOP_LEFT" prefHeight="34.0" prefWidth="207.0" text="X days to your big event!">
+            <ProgressBar fx:id="progressbar" prefHeight="22.0" prefWidth="434.0" progress="0.29" />
+            <Label fx:id="progress_label" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="421.0" text="X days to your big event!" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>

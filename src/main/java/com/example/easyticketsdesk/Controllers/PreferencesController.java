@@ -74,7 +74,7 @@ public class PreferencesController {
             preferencesMap.put(categoryName, selected);
         }
 
-        // TODO: Save this preferencesMap to the db by UPDATE request
+        // Save in the db
         RequestsUtility.setUserPreferencesMapping(mainWindowController.getJwt(), preferencesMap);
         System.out.println("Preferences Saved: " + preferencesMap);
     }

@@ -41,6 +41,7 @@ public class OrderComponent extends AnchorPane {
         this.event_date_label.setText(this.reservation.getEvent().getDateFormat());
         this.venue_label.setText(this.reservation.getEvent().getVenue());
         this.order_date_label.setText(this.reservation.getReservationDateFormat());
+        setQR(this.reservation.getSerialNum().toString());
     }
 
     public OrderComponent() {
@@ -52,13 +53,12 @@ public class OrderComponent extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        setQR();
     }
 
     @FXML
-    public void setQR(){
+    public void setQR(String code){
         try {
-            Image qrCodeImage = generateQRCodeImage("1234");
+            Image qrCodeImage = generateQRCodeImage(code);
             qrCodeImageView.setImage(qrCodeImage);
         } catch (WriterException | IOException e) {
             e.printStackTrace();

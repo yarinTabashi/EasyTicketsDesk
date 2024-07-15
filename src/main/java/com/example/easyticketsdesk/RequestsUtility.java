@@ -87,8 +87,7 @@ public class RequestsUtility {
         } catch (ConnectException e) {
             System.err.println("Connection refused: Please check server availability.");
             return false;
-        }
-        catch (IOException | JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
             return false;
         } finally {
@@ -360,13 +359,11 @@ public class RequestsUtility {
 
                     // Parse JSON Array into List<Event>
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        try
-                        {
+                        try {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             Event event = new Event(jsonObject);
                             events.add(event);
-                        }
-                        catch (Exception e){
+                        } catch (Exception e) {
                             System.err.println("Error occurred while trying parsing the json object to Event.");
                         }
                     }
@@ -416,13 +413,11 @@ public class RequestsUtility {
 
                     // Parse JSON Array into List<Event>
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        try
-                        {
+                        try {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             Seat seat = new Seat(jsonObject);
                             seats.add(seat);
-                        }
-                        catch (Exception e){
+                        } catch (Exception e) {
                             System.err.println("Error occurred while trying parsing the json object to Seat.");
                         }
                     }
@@ -528,5 +523,54 @@ public class RequestsUtility {
         }
 
         return reservations;
+    }
+
+    public static Event getCloseEvent(String token) {
+        HttpURLConnection connection = null;
+        List<Reservation> reservations = new ArrayList<>();
+
+        try {
+            // Create connection
+            URL url = new URL(MAIN_URL + "/reservations/closest");
+            connection = (HttpURLConnection) url.openConnection();
+
+            // Set request method and headers
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Authorization", "Bearer " + token);
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // Get Response
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = in.readLine()) != null) {
+                        response.append(line);
+                    }
+                    JSONObject jsonObject = new JSONObject(response.toString());
+
+                    // Parse JSON object into Event object
+                    try {
+                        Event event = new Event(jsonObject);
+                        return event;
+                    } catch (Exception e) {
+                        System.err.println("Error occurred while trying to parse the json object to Event.");
+                    }
+
+                } catch (IOException | JSONException e) {
+                    throw new RuntimeException("Error processing response", e);
+                }
+            } else {
+                System.err.println("HTTP error code: " + responseCode);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error making HTTP request", e);
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+        return null;
     }
 }

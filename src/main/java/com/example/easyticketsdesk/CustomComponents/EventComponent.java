@@ -58,7 +58,7 @@ public class EventComponent extends VBox {
         this.venue_label.setText(this.event.getVenue());
         this.date_label.setText(this.event.getDateFormat());
 
-        this.setImage("https://media.istockphoto.com/id/1471448614/photo/crowd-of-people-dancing-at-a-music-show-in-barcelona-during-the-summer-of-2022.jpg?s=612x612&w=0&k=20&c=FpGZq6p-1Gqx1JHN-mgapyQhLlvtNGr2M-hxm7mSvt0=");
+        this.setImage(this.event.getUrl());
     }
 
 
@@ -69,7 +69,7 @@ public class EventComponent extends VBox {
         service.setOnSucceeded(event -> {
             Image loadedImage = service.getValue();
             imageView.setFitWidth(255);
-            imageView.setFitHeight(110);
+            imageView.setFitHeight(130);
             imageView.setPreserveRatio(false);
             imageView.setImage(loadedImage);
         });

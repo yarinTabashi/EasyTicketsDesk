@@ -1,37 +1,37 @@
 package com.example.easyticketsdesk.Entities;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class Reservation {
     private Long reservationId;
     private LocalDateTime reservationDate;
     private Seat seat;
     private Event event;
+    private Integer serialNum;
 
-    public Reservation(Long reservationId, LocalDateTime reservationDate, Seat seat, Event event) {
+    public Reservation(Long reservationId, LocalDateTime reservationDate, Seat seat, Event event, Integer serialNum) {
         this.reservationId = reservationId;
         this.reservationDate = reservationDate;
         this.seat = seat;
         this.event = event;
+        this.serialNum = serialNum;
     }
 
     public Reservation(JSONObject jsonObject) throws JSONException {
         this.reservationId = jsonObject.getLong("id");
-        //this.reservationDate = Date.from(java.time.ZonedDateTime.parse(jsonObject.getString("reservationDate")).toInstant());
 
         // Parse date string using DateTimeFormatter
         String dateStr = jsonObject.getString("reservationDate");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
         this.reservationDate = LocalDateTime.parse(dateStr, formatter);
 
-
         // Parse the seat object first
         JSONObject seatObject = jsonObject.getJSONObject("seat");
         this.seat = new Seat(seatObject); // Assuming Seat has a constructor that accepts JSONObject
+
+        this.serialNum = jsonObject.getInt("serialNum");
 
         // Now, extract the event object from the seat
         if (seatObject.has("event")) {
@@ -75,5 +75,13 @@ public class Reservation {
 
     public void setSeat(Seat seat) {
         this.seat = seat;
+    }
+
+    public Integer getSerialNum() {
+        return serialNum;
+    }
+
+    public void setSerialNum(Integer serialNum) {
+        this.serialNum = serialNum;
     }
 }

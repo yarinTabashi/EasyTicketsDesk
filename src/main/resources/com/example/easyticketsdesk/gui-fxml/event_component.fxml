@@ -7,16 +7,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root prefHeight="305.0" prefWidth="329.0" styleClass="myborder" type="VBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="305.0" prefWidth="329.0" type="VBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane fx:id="image_pane" prefHeight="139.0" prefWidth="278.0" styleClass="image-pane">
-         <VBox.margin>
-            <Insets left="30.0" right="30.0" />
-         </VBox.margin>
-         <children>
-            <ImageView fx:id="imageView" fitHeight="147.0" fitWidth="255.0" layoutX="-3.0" layoutY="-2.0" preserveRatio="true" styleClass="my-image-pane" />
-         </children>
-      </Pane>
+      <StackPane alignment="CENTER">
+         <ImageView fx:id="imageView" fitHeight="147.0" fitWidth="287.0" opacity="0.92" preserveRatio="true" />
+      </StackPane>
       <Label fx:id="name_label" prefHeight="62.0" prefWidth="324.0" text="Eyal Golan" textFill="#ffffff" wrapText="true">
          <font>
             <Font name="System Bold" size="21.0" />

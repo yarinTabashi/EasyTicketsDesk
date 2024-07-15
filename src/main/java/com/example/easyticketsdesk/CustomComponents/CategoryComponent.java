@@ -20,8 +20,8 @@ public class CategoryComponent extends Button {
         super();
         this.categoryName = category_name;
         setText(category_name);
-        setFont(Font.font("System Bold", 25.0));
-        setPrefWidth(129.0);
+        setFont(Font.font("System Bold", 22.0));
+        setPrefWidth(150.0);
         setPrefHeight(131.0);
 
         if (isSelected){
