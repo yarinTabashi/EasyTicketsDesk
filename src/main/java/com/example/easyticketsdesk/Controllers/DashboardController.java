@@ -2,13 +2,16 @@ package com.example.easyticketsdesk.Controllers;
 import com.example.easyticketsdesk.CustomComponents.EventComponent;
 import com.example.easyticketsdesk.Entities.Event;
 import com.example.easyticketsdesk.RequestsUtility;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class DashboardController {
     @FXML

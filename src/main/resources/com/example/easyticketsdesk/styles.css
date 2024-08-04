@@ -120,3 +120,15 @@
     -fx-scale-x: 1.1; /* Scale horizontally */
     -fx-scale-y: 1.1; /* Scale vertically */
 }
+
+
+
+.choice-box .context-menu { -fx-background-color: black; }
+.choice-box .menu-item:focused { -fx-background-color: #452a72; }
+.choice-box .menu-item > .label { -fx-text-fill: white; }
+.choice-box .menu-item:focused > .label { -fx-text-fill: white; }
+.choice-box {
+  -fx-background-color: #452a72;
+  -fx-mark-color: white;
+}
+.choice-box > .label { -fx-text-fill: white; }

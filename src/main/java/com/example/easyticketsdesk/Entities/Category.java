@@ -1,5 +1,8 @@
 package com.example.easyticketsdesk.Entities;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Category {
     private Long categoryId;
     private String categoryName;
@@ -11,6 +14,11 @@ public class Category {
     public Category(Long categoryId, String categoryName){
         this.categoryId = categoryId;
         this.categoryName = categoryName;
+    }
+
+    public Category(JSONObject jsonObject) throws JSONException {
+        this.categoryId = jsonObject.getLong("id");
+        this.categoryName = jsonObject.getString("name");
     }
 
     public Long getCategoryId() {

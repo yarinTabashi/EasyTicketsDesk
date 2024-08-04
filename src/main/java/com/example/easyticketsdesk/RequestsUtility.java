@@ -240,6 +240,14 @@ public class RequestsUtility {
         return null;
     }
 
+    public static Set<String> getCategories(String token) {
+        Map<String, Boolean> preferences = getUserPreferences(token);
+        if (preferences != null) {
+            return preferences.keySet();
+        }
+        return null;
+    }
+
     public static void setUserPreferencesMapping(String token, Map<String, Boolean> preferencesMap) {
         HttpURLConnection connection = null;
         try {

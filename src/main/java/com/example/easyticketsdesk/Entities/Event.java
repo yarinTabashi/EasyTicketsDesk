@@ -41,7 +41,7 @@ public class Event {
 
         // Parse category (assuming Category class exists and has a constructor that accepts JSONObject)
         JSONObject categoryObject = jsonObject.getJSONObject("category");
-        this.category = null;
+        this.category = new Category(categoryObject);
         //this.category = new Category(categoryObject);
     }
 
