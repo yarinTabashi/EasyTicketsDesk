@@ -4,7 +4,9 @@ import com.example.easyticketsdesk.Entities.Event;
 import com.example.easyticketsdesk.Entities.Seat;
 import com.example.easyticketsdesk.RequestsUtility;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
@@ -84,11 +86,19 @@ public class SeatsController {
         System.out.println("Reserved clicked");
         boolean succeed = RequestsUtility.reserve(mainWindowController.getJwt(), this.chosenSeat.getId().intValue());
         if (succeed){
-            System.out.println("Succeed");
+            showMessage("Success", "Reservation successful!", Alert.AlertType.INFORMATION);
+            mainWindowController.load_dashboard();
         }
         else{
-            System.out.println("Unsucceed");
+            showMessage("Error", "Reservation failed. Please try again.", Alert.AlertType.ERROR);
         }
+    }
+
+    private void showMessage(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType, message, ButtonType.OK);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.showAndWait();
     }
 
     // Sets the event details on the window.

@@ -462,7 +462,7 @@ public class RequestsUtility {
 
             // Check response code
             int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_CREATED) {
+            if (responseCode == HttpURLConnection.HTTP_OK) {
                 return true; // Reservation created successfully
             } else {
                 System.out.println("Failed to reserve seat. HTTP response code: " + responseCode);

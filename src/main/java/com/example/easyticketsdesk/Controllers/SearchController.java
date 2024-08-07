@@ -43,10 +43,9 @@ public class SearchController {
         this.eventsList = RequestsUtility.getUpcomingEvents(mainWindowController.getJwt());
 
         try {
-            // Retrieve categories using the JWT token
+            // Retrieve categories
             Set<String> categories = RequestsUtility.getCategories(mainWindowController.getJwt());
 
-            // Ensure that categories are not null
             if (categories != null) {
                 // Update the ChoiceBox with the categories
                 categoryChoicebox.setItems(FXCollections.observableArrayList(categories));
@@ -117,14 +116,6 @@ public class SearchController {
         // Call set_upcoming_events with the keyword and selected category
         set_upcoming_events(keyWord, selectedCategory);
     }
-
-//    private void filterEvents() {
-//        String keyWord = search_field.getText().trim();
-//        String selectedCategory = categoryChoicebox.getValue();
-//
-//        // Call set_upcoming_events with the keyword and selected category
-//        set_upcoming_events(keyWord, selectedCategory);
-//    }
 
     public void clear_clicked(MouseEvent mouseEvent) {
         // Clear search field
