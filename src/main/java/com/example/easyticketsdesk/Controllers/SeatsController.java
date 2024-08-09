@@ -2,6 +2,7 @@ package com.example.easyticketsdesk.Controllers;
 import com.example.easyticketsdesk.CustomComponents.SeatComponent;
 import com.example.easyticketsdesk.Entities.Event;
 import com.example.easyticketsdesk.Entities.Seat;
+import com.example.easyticketsdesk.RedisSubscriber;
 import com.example.easyticketsdesk.RequestsUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -37,6 +38,13 @@ public class SeatsController {
         this.seatList = RequestsUtility.getSeatsMapping(mainWindowController.getJwt(), this.event.getEventId().intValue());
         updateSeatGrid();
         setEventDetails();
+
+        // Initialize the RedisSubscriber
+        String channelName = "purchase-channel-" + event.getEventId().toString();
+        RedisSubscriber redisSubscriber = new RedisSubscriber("localhost", 6379, channelName);
+        Thread subscriberThread = new Thread(redisSubscriber);
+        subscriberThread.setDaemon(true);
+        subscriberThread.start();
     }
 
     public void setMainWindowController(MainWindowController mainWindowController){

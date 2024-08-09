@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+    private static final String REDIS_HOST = "localhost";
+    private static final int REDIS_PORT = 6379;
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/easyticketsdesk/gui-fxml/main_sign.fxml"));
