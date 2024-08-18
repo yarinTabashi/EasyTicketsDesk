@@ -1,5 +1,4 @@
 package com.example.easyticketsdesk;
-
 import javafx.scene.control.Alert;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;

@@ -69,7 +69,7 @@ public class RequestsUtility {
         }
     }
 
-    public static boolean register(String firstName, String lastName, String email, String password) {
+    public static JSONObject register(String firstName, String lastName, String email, String password)  {
         HttpURLConnection connection = null;
         try {
             connection = createConnection("/auth/signup");
@@ -81,15 +81,13 @@ public class RequestsUtility {
             jsonInput.put("email", email);
             jsonInput.put("password", password);
 
-            int responseCode = connection.getResponseCode();
-            return responseCode == HttpURLConnection.HTTP_OK;
-
+            return sendRequest(connection, jsonInput);
         } catch (ConnectException e) {
             System.err.println("Connection refused: Please check server availability.");
-            return false;
+            return null;
         } catch (IOException | JSONException e) {
             e.printStackTrace();
-            return false;
+            return null;
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -136,7 +134,7 @@ public class RequestsUtility {
         }
     }
 
-    public static JSONObject verifyOTP(String email, Integer otp) {
+    public static JSONObject verifyOTP(String email, int otp) {
         HttpURLConnection connection = null;
         try {
             connection = createConnection("/auth/verify-otp");

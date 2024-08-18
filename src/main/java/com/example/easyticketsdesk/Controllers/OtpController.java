@@ -139,7 +139,7 @@ public class OtpController implements Initializable {
             int otp = Integer.parseInt(otpString);
 
             // Verify OTP using RequestsUtility
-            JSONObject jsonObject = RequestsUtility.verifyOTP("yafa@gmail.com", otp);
+            JSONObject jsonObject = RequestsUtility.verifyOTP(emailAddress, otp);
             if (jsonObject == null){
                 this.warning_label.setText("Invalid OTP. Try again");
             }

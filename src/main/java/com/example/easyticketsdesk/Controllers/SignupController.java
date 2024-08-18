@@ -1,4 +1,5 @@
 package com.example.easyticketsdesk.Controllers;
+import com.example.easyticketsdesk.Entities.UserProfile;
 import com.example.easyticketsdesk.RequestsUtility;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.io.IOException;
 
 public class SignupController {
@@ -38,18 +41,23 @@ public class SignupController {
     }
 
     @FXML
-    void signup_clicked(MouseEvent event) {
+    void signup_clicked(MouseEvent event) throws JSONException {
         if (validateFields()) {
-            boolean succeed = RequestsUtility.register(first_name_field.getText(), last_name_field.getText(), email_field.getText(), password_field.getText());
-            if (succeed){
-                System.out.println("Succeed. Now move to verify your email (OTP)");
-                //mainScreenController.loadOTP();
-            }
-            else {
+            JSONObject jsonObject = RequestsUtility.register(first_name_field.getText(), last_name_field.getText(), email_field.getText(), password_field.getText());
+
+            if (jsonObject == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Register failed");
                 alert.setContentText("An error occurred while registration");
                 alert.showAndWait();
+            } else {
+                try {
+                    System.out.println(jsonObject.getString("email"));
+                    System.out.println(jsonObject.getString("token"));
+                    switchToMainWindow(jsonObject.getString("token"));
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
@@ -103,12 +111,20 @@ public class SignupController {
         alert.showAndWait();
     }
 
-    private void switchToMainWindow() {
+    private void switchToMainWindow(String currentJwt) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/dashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/main_window.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
 
+            // Access the controller instance
+            MainWindowController controller = loader.getController();
+
+            // Pass currentJwt to the controller and load user details
+            UserProfile userProfile = RequestsUtility.getUserProfile(currentJwt);
+            controller.SetUserData(userProfile);
+            controller.load_dashboard();
+
+            Scene scene = new Scene(root);
             Stage stage = (Stage) signup_btn.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
