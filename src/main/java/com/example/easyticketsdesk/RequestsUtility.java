@@ -46,6 +46,12 @@ public class RequestsUtility {
         }
     }
 
+    /**
+     * Sign-in request with the given email and password.
+     * @param email The email of the user.
+     * @param password The password of the user.
+     * @return A JSONObject containing the response from the server.
+     */
     public static JSONObject login(String email, String password) {
         HttpURLConnection connection = null;
         try {
@@ -69,6 +75,9 @@ public class RequestsUtility {
         }
     }
 
+    /**
+     * Register request with the given first name, last name, email and password.
+     * */
     public static JSONObject register(String firstName, String lastName, String email, String password)  {
         HttpURLConnection connection = null;
         try {
@@ -95,6 +104,10 @@ public class RequestsUtility {
         }
     }
 
+    /**
+     * Helper method to convert JSON object to Map<String, Boolean>
+     * where the keys are the category names and the values are the boolean values.
+     */
     private static Map<String, Boolean> convertJsonToMap(JSONObject jsonObject) {
         Map<String, Boolean> map = new HashMap<>();
         Iterator<String> keys = jsonObject.keys();
@@ -110,6 +123,11 @@ public class RequestsUtility {
         return map;
     }
 
+    /**
+     * A request for sending OTP to the given email.
+     * @param email The email to send the OTP to.
+     * @return True if the OTP was sent successfully, false otherwise.
+     */
     public static boolean sendOTP(String email) {
         HttpURLConnection connection = null;
         try {
@@ -134,6 +152,12 @@ public class RequestsUtility {
         }
     }
 
+    /**
+     * A request to verify the OTP sent to the given email.
+     * @param email The email to verify the OTP for.
+     * @param otp The OTP to verify.
+     * @return A JSONObject containing the response from the server.
+     */
     public static JSONObject verifyOTP(String email, int otp) {
         HttpURLConnection connection = null;
         try {
@@ -152,16 +176,19 @@ public class RequestsUtility {
             }
         }
         return null;
-        //return false;
     }
 
+    /**
+     * A request to update the password for the given token.
+     * @param token The token of the user.
+     * @param newPassword The new password to update.
+     * @return True if the password was updated successfully, false otherwise.
+     */
     public static boolean updatePassword(String token, String newPassword) {
         HttpURLConnection connection = null;
         try {
             // Create connection to the endpoint
             connection = createConnection("/auth/update-password");
-            //URL url = new URL("/auth/update-password");
-            //connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Authorization", "Bearer " + token);
             connection.setRequestProperty("Content-Type", "application/json");
@@ -197,6 +224,11 @@ public class RequestsUtility {
         }
     }
 
+    /**
+     * A request to get the user preferences for the given token.
+     * @param token The token of the user.
+     * @return A Map<String, Boolean> containing the user preferences.
+     */
     public static Map<String, Boolean> getUserPreferences(String token) {
         HttpURLConnection connection = null;
         try {
@@ -238,6 +270,11 @@ public class RequestsUtility {
         return null;
     }
 
+    /**
+     * A request to get the user preferences for the given token.
+     * @param token The token of the user.
+     * @return A Set<String> containing the user preferences.
+     */
     public static Set<String> getCategories(String token) {
         Map<String, Boolean> preferences = getUserPreferences(token);
         if (preferences != null) {
@@ -246,6 +283,11 @@ public class RequestsUtility {
         return null;
     }
 
+    /**
+     * A request to update the user preferences for the given token.
+     * @param token The token of the user.
+     * @param preferencesMap A Map<String, Boolean> containing the user preferences.
+     */
     public static void setUserPreferencesMapping(String token, Map<String, Boolean> preferencesMap) {
         HttpURLConnection connection = null;
         try {
@@ -283,7 +325,11 @@ public class RequestsUtility {
         }
     }
 
-    // Helper method to convert Map<String, Boolean> to JSONObject
+    /**
+     * Helper method to convert a Map<String, Boolean> to a JSONObject.
+     * @param map The Map<String, Boolean> to convert.
+     * @return The JSONObject representation of the map.
+     */
     private static JSONObject convertMapToJson(Map<String, Boolean> map) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         for (Map.Entry<String, Boolean> entry : map.entrySet()) {
@@ -292,6 +338,11 @@ public class RequestsUtility {
         return jsonObject;
     }
 
+    /**
+     * A request to retrieve the user profile by the given token.
+     * @param token The token of the user.
+     * @return A UserProfile object containing the user profile details.
+     */
     public static UserProfile getUserProfile(String token) {
         HttpURLConnection connection = null;
         try {
@@ -338,6 +389,11 @@ public class RequestsUtility {
         return null;
     }
 
+    /**
+     * A request to get the upcoming events.
+     * @param token The token of the user.
+     * @return A List<Event> containing the upcoming events.
+     */
     public static List<Event> getUpcomingEvents(String token) {
         HttpURLConnection connection = null;
         List<Event> events = new ArrayList<>();
@@ -392,6 +448,12 @@ public class RequestsUtility {
         return events;
     }
 
+    /**
+     * A request to get the seats mapping for the given event.
+     * @param token The token of the user.
+     * @param eventId The ID of the event.
+     * @return A List<Seat> containing the seats mapping for the event.
+     */
     public static List<Seat> getSeatsMapping(String token, int eventId) {
         HttpURLConnection connection = null;
         List<Seat> seats = new ArrayList<>();
@@ -446,6 +508,11 @@ public class RequestsUtility {
         return seats;
     }
 
+    /**
+     *  A request to reserve a seat with the given token and seat ID.
+     *  @param token The token of the user.
+     *  @param seatId The ID of the seat to reserve.
+     * */
     public static boolean reserve(String token, int seatId) {
         HttpURLConnection connection = null;
         try {
@@ -479,6 +546,11 @@ public class RequestsUtility {
         }
     }
 
+    /**
+     * A request to get all reservations by the given token.
+     * @param token The token of the user.
+     * @return A List<Reservation> containing all the reservations.
+     */
     public static List<Reservation> getAllReservations(String token) {
         HttpURLConnection connection = null;
         List<Reservation> reservations = new ArrayList<>();
@@ -531,6 +603,11 @@ public class RequestsUtility {
         return reservations;
     }
 
+    /**
+     * A request to get the closest upcoming event.
+     * @param token The token of the user.
+     * @return An Event object containing the closest event.
+     */
     public static Event getCloseEvent(String token) {
         HttpURLConnection connection = null;
         List<Reservation> reservations = new ArrayList<>();
@@ -580,6 +657,10 @@ public class RequestsUtility {
         return null;
     }
 
+    /**
+     *  A request to update the mutable details of a user with the provided information.
+     *  @param token The authentication token of the user.
+     * */
     public static boolean updateUserDetails(String token, String firstName, String lastName, String email) {
         HttpURLConnection connection = null;
 

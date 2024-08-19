@@ -3,6 +3,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.image.Image;
 
+// This class is used to load images in the background
 public class ImageLoadingService extends Service<Image> {
 
     private final String imageUrl;
