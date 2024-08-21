@@ -3,7 +3,7 @@ import com.example.easyticketsdesk.CustomComponents.SeatComponent;
 import com.example.easyticketsdesk.Entities.Event;
 import com.example.easyticketsdesk.Entities.Seat;
 import com.example.easyticketsdesk.RedisSubscriber;
-import com.example.easyticketsdesk.RequestsUtility;
+import com.example.easyticketsdesk.RequestsUtilty.MainRequests;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -35,7 +35,7 @@ public class SeatsController {
         this.mainWindowController = mainWindowController;
         this.event = event;
 
-        this.seatList = RequestsUtility.getSeatsMapping(mainWindowController.getJwt(), this.event.getEventId().intValue());
+        this.seatList = MainRequests.getSeatsMapping(mainWindowController.getJwt(), this.event.getEventId().intValue());
         updateSeatGrid();
         setEventDetails();
 
@@ -92,7 +92,7 @@ public class SeatsController {
 
     public void reserve_clicked(MouseEvent mouseEvent) {
         System.out.println("Reserved clicked");
-        boolean succeed = RequestsUtility.reserve(mainWindowController.getJwt(), this.chosenSeat.getId().intValue());
+        boolean succeed = MainRequests.reserve(mainWindowController.getJwt(), this.chosenSeat.getId().intValue());
         if (succeed){
             showMessage("Success", "Reservation successful!", Alert.AlertType.INFORMATION);
             mainWindowController.load_dashboard();

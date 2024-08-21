@@ -1,18 +1,12 @@
 package com.example.easyticketsdesk.Controllers;
-import com.example.easyticketsdesk.Entities.UserProfile;
-import com.example.easyticketsdesk.RequestsUtility;
+import com.example.easyticketsdesk.RequestsUtilty.AuthRequests;
+import com.example.easyticketsdesk.RequestsUtilty.MainRequests;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class RestorePassword {
     private String currentJWT;
@@ -35,7 +29,7 @@ public class RestorePassword {
     @FXML
     public void restoreBtnClicked(MouseEvent mouseEvent) {
         if (checkMatching()){
-            boolean succeed = RequestsUtility.updatePassword(currentJWT, passwordField.getText());
+            boolean succeed = AuthRequests.updatePassword(currentJWT, passwordField.getText());
             if (succeed){
                 this.mainSignController.loadSignInScreen();
             }

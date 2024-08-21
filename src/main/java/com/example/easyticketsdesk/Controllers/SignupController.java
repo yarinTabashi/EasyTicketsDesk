@@ -1,6 +1,7 @@
 package com.example.easyticketsdesk.Controllers;
 import com.example.easyticketsdesk.Entities.UserProfile;
-import com.example.easyticketsdesk.RequestsUtility;
+import com.example.easyticketsdesk.RequestsUtilty.MainRequests;
+import com.example.easyticketsdesk.RequestsUtilty.AuthRequests;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -43,7 +44,7 @@ public class SignupController {
     @FXML
     void signup_clicked(MouseEvent event) throws JSONException {
         if (validateFields()) {
-            JSONObject jsonObject = RequestsUtility.register(first_name_field.getText(), last_name_field.getText(), email_field.getText(), password_field.getText());
+            JSONObject jsonObject = AuthRequests.register(first_name_field.getText(), last_name_field.getText(), email_field.getText(), password_field.getText());
 
             if (jsonObject == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -120,7 +121,7 @@ public class SignupController {
             MainWindowController controller = loader.getController();
 
             // Pass currentJwt to the controller and load user details
-            UserProfile userProfile = RequestsUtility.getUserProfile(currentJwt);
+            UserProfile userProfile = MainRequests.getUserProfile(currentJwt);
             controller.SetUserData(userProfile);
             controller.load_dashboard();
 

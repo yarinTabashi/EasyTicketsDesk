@@ -1,7 +1,7 @@
 package com.example.easyticketsdesk.Controllers;
 import com.example.easyticketsdesk.CustomComponents.EventComponent;
 import com.example.easyticketsdesk.Entities.Event;
-import com.example.easyticketsdesk.RequestsUtility;
+import com.example.easyticketsdesk.RequestsUtilty.MainRequests;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -40,11 +40,11 @@ public class SearchController {
 
     public void initializeScreen(){
         this.welcome_label.setText(mainWindowController.getWelcomeText());
-        this.eventsList = RequestsUtility.getUpcomingEvents(mainWindowController.getJwt());
+        this.eventsList = MainRequests.getUpcomingEvents(mainWindowController.getJwt());
 
         try {
             // Retrieve categories
-            Set<String> categories = RequestsUtility.getCategories(mainWindowController.getJwt());
+            Set<String> categories = MainRequests.getCategories(mainWindowController.getJwt());
 
             if (categories != null) {
                 // Update the ChoiceBox with the categories

@@ -1,6 +1,7 @@
 package com.example.easyticketsdesk.Controllers;
 import com.example.easyticketsdesk.Entities.UserProfile;
-import com.example.easyticketsdesk.RequestsUtility;
+import com.example.easyticketsdesk.RequestsUtilty.AuthRequests;
+import com.example.easyticketsdesk.RequestsUtilty.MainRequests;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,7 +43,7 @@ public class SignInController {
 //        switchToMainWindow(jsonObject.getString("token"));
         if (validateFields()) {
             // Proceed with login logic and scene switching
-            JSONObject jsonObject = RequestsUtility.login(email_field.getText(), password_field.getText());
+            JSONObject jsonObject = AuthRequests.login(email_field.getText(), password_field.getText());
             if (jsonObject == null){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Login failed");
@@ -109,7 +110,7 @@ public class SignInController {
             MainWindowController controller = loader.getController();
 
             // Pass currentJwt to the controller and load user details
-            UserProfile userProfile = RequestsUtility.getUserProfile(currentJwt);
+            UserProfile userProfile = MainRequests.getUserProfile(currentJwt);
             controller.SetUserData(userProfile);
             controller.load_dashboard();
 

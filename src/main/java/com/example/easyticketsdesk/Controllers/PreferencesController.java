@@ -1,6 +1,6 @@
 package com.example.easyticketsdesk.Controllers;
 import com.example.easyticketsdesk.CustomComponents.CategoryComponent;
-import com.example.easyticketsdesk.RequestsUtility;
+import com.example.easyticketsdesk.RequestsUtilty.MainRequests;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,7 +26,7 @@ public class PreferencesController {
 
     public void initializeComponents() {
         this.welcome_label.setText(mainWindowController.getWelcomeText());
-        Map<String, Boolean> preferencesMap = RequestsUtility.getUserPreferences(mainWindowController.getJwt());
+        Map<String, Boolean> preferencesMap = MainRequests.getUserPreferences(mainWindowController.getJwt());
         createCategoryComponents(preferencesMap);
     }
 
@@ -75,7 +75,7 @@ public class PreferencesController {
         }
 
         // Save in the db
-        RequestsUtility.setUserPreferencesMapping(mainWindowController.getJwt(), preferencesMap);
+        MainRequests.setUserPreferencesMapping(mainWindowController.getJwt(), preferencesMap);
         System.out.println("Preferences Saved: " + preferencesMap);
     }
 }

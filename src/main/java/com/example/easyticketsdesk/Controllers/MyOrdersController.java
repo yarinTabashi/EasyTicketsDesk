@@ -2,7 +2,7 @@ package com.example.easyticketsdesk.Controllers;
 import com.example.easyticketsdesk.CustomComponents.OrderComponent;
 import com.example.easyticketsdesk.Entities.Event;
 import com.example.easyticketsdesk.Entities.Reservation;
-import com.example.easyticketsdesk.RequestsUtility;
+import com.example.easyticketsdesk.RequestsUtilty.MainRequests;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -26,7 +26,7 @@ public class MyOrdersController {
     @FXML
     public void initialize(MainWindowController mainWindowController) {
         this.mainWindowController = mainWindowController;
-        this.reservations = RequestsUtility.getAllReservations(mainWindowController.getJwt());
+        this.reservations = MainRequests.getAllReservations(mainWindowController.getJwt());
 
         OrderComponent newComponent = null;
         for (Reservation reservation : reservations) {
@@ -41,7 +41,7 @@ public class MyOrdersController {
 
     public void setCloseEventDetails(){
         // Load the next event details
-        Event event = RequestsUtility.getCloseEvent(this.mainWindowController.getJwt());
+        Event event = MainRequests.getCloseEvent(this.mainWindowController.getJwt());
 
         if (event != null) {
             // Calculate days remaining to the event

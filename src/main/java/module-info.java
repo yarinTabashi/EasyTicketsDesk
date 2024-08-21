@@ -7,7 +7,6 @@ module com.example.easyticketsdesk {
     requires com.google.zxing.javase;
     requires com.fasterxml.jackson.databind;
     requires android.json;
-    //requires lettuce.core;
     requires redis.clients.jedis;
     opens com.example.easyticketsdesk to javafx.fxml;
     exports com.example.easyticketsdesk.Controllers;
@@ -17,4 +16,6 @@ module com.example.easyticketsdesk {
     opens com.example.easyticketsdesk.CustomComponents to javafx.fxml;
     exports com.example.easyticketsdesk.Entities;
     opens com.example.easyticketsdesk.Entities to javafx.fxml;
+    exports com.example.easyticketsdesk.RequestsUtilty;
+    opens com.example.easyticketsdesk.RequestsUtilty to javafx.fxml;
 }

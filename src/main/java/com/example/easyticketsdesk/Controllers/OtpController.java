@@ -1,5 +1,6 @@
 package com.example.easyticketsdesk.Controllers;
-import com.example.easyticketsdesk.RequestsUtility;
+import com.example.easyticketsdesk.RequestsUtilty.AuthRequests;
+import com.example.easyticketsdesk.RequestsUtilty.MainRequests;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -64,7 +65,7 @@ public class OtpController implements Initializable {
 
     public boolean setEmailAddressAndSend(String emailAddress){
         this.emailAddress = emailAddress;
-        boolean otpSent = RequestsUtility.sendOTP(this.emailAddress);
+        boolean otpSent = AuthRequests.sendOTP(this.emailAddress);
 
         if (!otpSent) {
             showAlert("Error", "Error Sending OTP",
@@ -139,7 +140,7 @@ public class OtpController implements Initializable {
             int otp = Integer.parseInt(otpString);
 
             // Verify OTP using RequestsUtility
-            JSONObject jsonObject = RequestsUtility.verifyOTP(emailAddress, otp);
+            JSONObject jsonObject = AuthRequests.verifyOTP(emailAddress, otp);
             if (jsonObject == null){
                 this.warning_label.setText("Invalid OTP. Try again");
             }
@@ -158,7 +159,7 @@ public class OtpController implements Initializable {
     // Checks if the resend interval is over and sends OTP using RequestsUtility.
     public void resend_clicked(MouseEvent mouseEvent) {
         if  (isIntervalOver){
-            RequestsUtility.sendOTP(this.emailAddress);
+            AuthRequests.sendOTP(this.emailAddress);
             startTimer();
         }
     }
