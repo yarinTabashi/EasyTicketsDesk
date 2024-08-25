@@ -39,8 +39,6 @@ public class SignInController {
 
     @FXML
     void signInBtnClicked(MouseEvent event) throws JSONException {
-//        JSONObject jsonObject = RequestsUtility.login("yarin@gmail.com", "yarinworld");
-//        switchToMainWindow(jsonObject.getString("token"));
         if (validateFields()) {
             // Proceed with login logic and scene switching
             JSONObject jsonObject = AuthRequests.login(email_field.getText(), password_field.getText());

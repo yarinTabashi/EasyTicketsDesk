@@ -4,10 +4,13 @@ import com.example.easyticketsdesk.Entities.UserProfile;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.time.LocalTime;
 
@@ -20,6 +23,7 @@ public class MainWindowController {
     private Label explore_btn, preferences_btn, orders_btn, search_btn; // Menu "buttons"
     @FXML
     private ImageView edit_profile_icon;
+    private ImageView logout_icon;
 
     // Additional necessary information
     private UserProfile userProfile;
@@ -157,7 +161,6 @@ public class MainWindowController {
 
             EditProfileController editProfileController = loader.getController();
             editProfileController.initialize(this, this.userProfile);
-            //editProfileController.setWelcomeLabel(userProfile);
 
             // Set the right content of border_pane to signInRoot
             border_pane.setRight(editProfileRoot);
@@ -181,5 +184,26 @@ public class MainWindowController {
 
     public void edit_profile_clicked(MouseEvent mouseEvent) {
         this.load_edit_profile_screen();
+    }
+
+    // Load the login screen and switch the scene
+    private void switchToSignIn() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/easyticketsdesk/gui-fxml/main_sign.fxml"));
+            Parent root = loader.load();
+
+            // Access the controller instance
+            MainSign controller = loader.getController();
+
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) explore_btn.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void logout_clicked(MouseEvent mouseEvent) {
+        this.switchToSignIn();
     }
 }

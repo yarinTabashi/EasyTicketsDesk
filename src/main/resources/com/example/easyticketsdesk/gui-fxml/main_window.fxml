@@ -70,12 +70,12 @@
                                <Font size="11.0" />
                            </font>
                        </Label>
-                       <ImageView fitHeight="75.0" fitWidth="68.0" layoutX="11.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                       <ImageView fx:id="logout_btn" fitHeight="65.0" fitWidth="62.0" layoutX="12.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#logout_clicked">
                            <image>
-                               <Image url="@../icons/abstract-user-flat-4.png" />
+                               <Image url="@../icons/logout.png" />
                            </image>
                        </ImageView>
-                       <ImageView fx:id="edit_profile_icon" fitHeight="22.0" fitWidth="21.0" layoutX="193.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#edit_profile_clicked">
+                       <ImageView fx:id="edit_profile_icon" fitHeight="22.0" fitWidth="21.0" layoutX="193.0" layoutY="25.0" onMouseClicked="#edit_profile_clicked" pickOnBounds="true" preserveRatio="true">
                            <image>
                                <Image url="@../icons/edit-icon.png" />
                            </image>
